@@ -1,9 +1,117 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useUserStore } from "../store/userStore";
+import { usePostStore } from "../store/postsStore";
+
+// import { zodResolver } from '@hookform/resolvers/zod'
 
 const CreateBlog = () => {
-  return (
-    <div>CreateBlog</div>
-  )
-}
+  const navigate = useNavigate();
 
-export default CreateBlog
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm({
+    // resolver: zodResolver(login),
+    defaultValues: {
+      title: "",
+      content: "",
+    },
+  });
+
+  const { createNewPost } = usePostStore();
+
+  const onSubmitHandler = async (data) => {
+    console.log(data);
+    const response = await createNewPost(data);
+    console.log(response);
+    reset();
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <Card className="lg:w-[40%] sm:w-[60%] w-[90%] max-h-[80vh] overflow-auto shadow-md">
+        <CardHeader className="">
+          <CardTitle className="text-center">Create new blog</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form
+            className="flex flex-col gap-4"
+            onSubmit={handleSubmit(onSubmitHandler)}
+          >
+            <div className="flex flex-col gap-2 items-start text-muted-foreground">
+              {/* <label
+                className="font-bold text-xs text-gray-300"
+                htmlFor="title"
+              >
+                Title
+              </label> */}
+              <Input placeholder="Title" {...register("title")} />
+              {errors.title && (
+                <p className="text-red-500 text-xs">{errors.title.message}</p>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2 items-start text-muted-foreground">
+              {/* <label
+                className="font-bold text-xs text-gray-300"
+                htmlFor="content"
+              >
+                Content
+              </label> */}
+              <Textarea
+                placeholder="content goes here..."
+                {...register("content")}
+              />
+              {errors.content && (
+                <p className="text-red-500 text-xs">{errors.content.message}</p>
+              )}
+            </div>
+            <Button
+              disabled={false}
+              type="submit"
+              className="my-6 bg-blue-400 hover:bg-blue-600"
+            >
+              Post
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      <div className="my-6 flex flex-col items-center text-center">
+        <p className="text-sm text-gray-600">
+          Want to see your blogs posts?
+          <Button className='text-blue-500 font-medium px-2' variant={'link'} >
+            <Link to={'/blogs'}>Click here</Link>
+          </Button>
+          to view.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default CreateBlog;

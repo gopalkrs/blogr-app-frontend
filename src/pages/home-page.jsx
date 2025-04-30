@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Button } from "../components/ui/button";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -13,6 +15,9 @@ const HomePage = () => {
         <p className="m-2 text-sm text-muted-foreground">
           Create, share, and inspire — your blog, your voice, your community.
         </p>
+        <Button>
+            <Link to={'/create'}>Get Started</Link>
+        </Button>
       </section>
     </div>
   );
