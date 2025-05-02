@@ -61,8 +61,8 @@ const BlogsDashboard = () => {
                   <span
                     className={`${
                       post.user[0].role === "admin"
-                        ? "bg-blue-500"
-                        : "bg-amber-400"
+                        ? "bg-red-400"
+                        : "bg-amber-300"
                     } px-1 rounded-full text-center text-xs font-light text-white`}
                   >
                     {post.user[0].role}

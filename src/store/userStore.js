@@ -23,8 +23,9 @@ export const useUserStore = create((set) => ({
       userData,
       { withCredentials: true }
     );
-    console.log(response.data);
+    //console.log(response.data);
     set({ user: response.data.user, isLoading: false });
+    
   },
   registerUser: async (userData) => {
     const response = await axios.post(

@@ -25,15 +25,23 @@ import React, { useEffect } from "react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 //import { useUserStore } from "../store/userStore";
-import { checkUserStore } from "../store/checkUserStore";
+import { useGetUserStore } from "../store/useGetUserStore";
 import { useUserStore } from "../store/userStore";
 
 const Header = () => {
-  const { fetchIfUserLogged, isLoading, user } = useUserStore();
+  const { fetchIfUserLogged, isLoading, user } = useGetUserStore();
 
   useEffect(() => {
     fetchIfUserLogged();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader2 className="w-8 h-8 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-row justify-between gap-1 items-center p-4 bg-black shadow-md">
@@ -41,7 +49,7 @@ const Header = () => {
         <Lightbulb className="h-4 w-4 text-white" />
         <h1 className="text-md md:text-lg font-medium text-amber-50">bloggr</h1>
       </Link>
-      {user ? (
+      {user? (
         <div className="flex flex-row gap-5 sm:gap-8 ">
           <div className="flex items-center">
             <DollarSign className="text-amber-100 h-4 w-4 inline sm:hidden" />
@@ -90,7 +98,7 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-20">
                 <DropdownMenuItem>
-                    <Link to={`/users/${user?.user.id}`} className="flex items-center gap-1">
+                    <Link to={`/users/${user?.id}`} className="flex items-center gap-1">
                       <User className="h-4 w-4" />
                       User
                     </Link>

@@ -36,8 +36,10 @@ const SignIn = () => {
     });
 
     const onSubmitHandler = async (data) => {
-        console.log(data)
-        await loginUser(data)
+        //console.log(data)
+        await loginUser(data);
+        navigate("/");
+        window.location.reload();
         //console.log(user);
     }
 

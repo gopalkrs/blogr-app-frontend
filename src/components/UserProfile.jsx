@@ -49,10 +49,10 @@ const UserProfile = ({ user }) => {
     <div className="flex flex-row justify-between items-center bg-amber-50 p-5 rounded-md shadow-md">
       <div className="flex flex-row gap-2 items-center">
         <div className="flex flex-col items-center gap-1">
-          <div className="rounded-full w-10 h-10 uppercase bg-blue-600 text-amber-50 flex items-center justify-center font-bold text-center">
+          <div className="rounded-full w-10 h-10 uppercase bg-black text-amber-50 flex items-center justify-center font-bold text-center">
             {user?.user.name.charAt(0)}
           </div>
-          <span className={`${user?.user.role === "admin"? "bg-blue-500": "bg-amber-300"} text-white rounded-full flex items-center justify-center text-center text-xs px-2`}>
+          <span className={`${user?.user.role === "admin"? "bg-red-400": "bg-amber-300"} text-white rounded-full flex items-center justify-center text-center text-xs px-2`}>
             {user?.user.role}
           </span>
         </div>

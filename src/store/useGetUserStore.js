@@ -1,7 +1,7 @@
 import axios from "axios";
 import { create } from "zustand";
 
-export const checkUserStore = create((set) => ({
+export const useGetUserStore = create((set) => ({
   user: null,
   isLoading: true,
   fetchIfUserLogged: async () => {
@@ -10,10 +10,10 @@ export const checkUserStore = create((set) => ({
         `${import.meta.env.VITE_API_URL}/users/logged`,
         { withCredentials: true }
       );
-    //   console.log(response);
-      set({ user: response.data, isLoading: false });
+      //console.log(response.data);
+      set({ user: response.data.user, isLoading: false });
     } catch (err) {
-      console.error(err);
+      console.log(err);
       set({ user: null, isLoading: false });
     }
   },

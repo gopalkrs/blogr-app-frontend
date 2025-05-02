@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useUserStore } from "../store/userStore";
 import { usePostStore } from "../store/postsStore";
+import { useGetUserStore } from "../store/useGetUserStore";
 
 // import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -43,7 +44,7 @@ const CreateBlog = () => {
   });
 
   const { createNewPost } = usePostStore();
-  const { user, fetchIfUserLogged } = useUserStore();
+  const { user, fetchIfUserLogged, isLoading } = useGetUserStore();
 
   useEffect(()=>{
     fetchIfUserLogged();
@@ -110,7 +111,7 @@ const CreateBlog = () => {
         <p className="text-sm text-gray-600">
           Want to see your blogs posts?
           <Button className='text-blue-500 font-medium px-2' variant={'link'} >
-            <Link to={`/users/${user.user.id}`}>Click here</Link>
+            <Link to={`/users/${user?.id}`}>Click here</Link>
           </Button>
           to view.
         </p>
