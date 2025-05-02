@@ -10,7 +10,7 @@ export const useUserStore = create((set) => ({
         `${import.meta.env.VITE_API_URL}/users/logged`,
         { withCredentials: true }
       );
-      console.log(response.data);
+      //console.log(response.data);
       set({ user: response.data, isLoading: false });
     } catch (err) {
       console.log(err);
@@ -43,6 +43,15 @@ export const useUserStore = create((set) => ({
     );
     console.log(response.data);
     set({ user: null, isLoading: false });
+  },
+  updateUser: (userdata) => {
+    const response = axios.patch(
+      `${import.meta.env.VITE_API_URL}/users/logged`,
+      userdata,
+      { withCredentials: true }
+    );
+    console.log(response.data);
+    set({ isLoading: false });
   },
   clearUser: () => set({ user: null }),
 }));

@@ -2,7 +2,7 @@ import axios from "axios";
 import { create } from "zustand";
 
 export const usePostStore = create((set) => ({
-  posts: null,
+  posts: [],
   isLoading: true,
   createNewPost: async (postData) => {
     try {
@@ -12,7 +12,7 @@ export const usePostStore = create((set) => ({
         { withCredentials: true }
       );
       //console.log(response.data);
-      set({ posts: response.data.posts, isLoading: false });
+      set({ isLoading: false });
     } catch (err) {
       console.error(err);
       set({ posts: null, isLoading: false });
@@ -24,7 +24,7 @@ export const usePostStore = create((set) => ({
         `${import.meta.env.VITE_API_URL}/posts/`,
         { withCredentials: true }
       );
-      //console.log(response.data);
+      console.log(response.data);
       set({ posts: response.data.posts, isLoading: false });
     } catch (err) {
       console.error(err);

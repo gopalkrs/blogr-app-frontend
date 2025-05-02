@@ -43,6 +43,11 @@ const CreateBlog = () => {
   });
 
   const { createNewPost } = usePostStore();
+  const { user, fetchIfUserLogged } = useUserStore();
+
+  useEffect(()=>{
+    fetchIfUserLogged();
+  },[])
 
   const onSubmitHandler = async (data) => {
     console.log(data);
@@ -105,7 +110,7 @@ const CreateBlog = () => {
         <p className="text-sm text-gray-600">
           Want to see your blogs posts?
           <Button className='text-blue-500 font-medium px-2' variant={'link'} >
-            <Link to={'/blogs'}>Click here</Link>
+            <Link to={`/users/${user.user.id}`}>Click here</Link>
           </Button>
           to view.
         </p>

@@ -5,8 +5,22 @@ import {
   LayoutDashboard,
   Lightbulb,
   Loader2,
+  LogOut,
+  User,
+  User2Icon,
+  UserRoundX,
   Zap,
 } from "lucide-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import React, { useEffect } from "react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
@@ -23,7 +37,7 @@ const Header = () => {
 
   return (
     <div className="flex flex-row justify-between gap-1 items-center p-4 bg-black shadow-md">
-      <Link to={'/'} className="flex flex-row items-center">
+      <Link to={"/"} className="flex flex-row items-center">
         <Lightbulb className="h-4 w-4 text-white" />
         <h1 className="text-md md:text-lg font-medium text-amber-50">bloggr</h1>
       </Link>
@@ -34,9 +48,11 @@ const Header = () => {
             <h3 className="text-sm text-amber-100 sm:block hidden">Pricing</h3>
           </div>
           <div className="flex items-center">
-          <Link to={'/blogs'}><LayoutDashboard className="text-amber-100 h-4 w-4 inline sm:hidden" /></Link>
+            <Link to={"/dashboard"}>
+              <LayoutDashboard className="text-amber-100 h-4 w-4 inline sm:hidden" />
+            </Link>
             <h3 className="text-sm text-amber-100 sm:block hidden">
-              <Link to={'/blogs'}>Dashboard</Link>
+              <Link to={"/dashboard"}>Dashboard</Link>
             </h3>
           </div>
         </div>
@@ -66,9 +82,31 @@ const Header = () => {
       {isLoading ? (
         <Loader2 className="h-4 w-4 animate-spin text-gray-900" />
       ) : (
-        <Button>
-          <Link to={"/login"}>{user ? "hey" : "Sign In"}</Link>
-        </Button>
+        <div>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <User2Icon className="w-5 h-5 text-amber-50" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-20">
+                <DropdownMenuItem>
+                    <Link to={`/users/${user?.user.id}`} className="flex items-center gap-1">
+                      <User className="h-4 w-4" />
+                      User
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className = 'flex items-center gap-1'>
+                    <LogOut className="h-4 w-4" />
+                    Signout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button>
+              <Link to={"/login"}>SignUp</Link>
+            </Button>
+          )}
+        </div>
       )}
     </div>
   );
