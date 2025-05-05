@@ -18,19 +18,6 @@ export const usePostStore = create((set) => ({
       set({ posts: null, isLoading: false });
     }
   },
-  getAllPost: async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/posts/`,
-        { withCredentials: true }
-      );
-      console.log(response.data);
-      set({ posts: response.data.posts, isLoading: false });
-    } catch (err) {
-      console.error(err);
-      set({ posts: null, isLoading: false });
-    }
-  },
   getPostWithId: async (id) => {
     try {
       const response = await axios.get(
@@ -59,4 +46,22 @@ export const usePostStore = create((set) => ({
     }
   },
 
+}));
+
+export const useGetUserPostStore = create((set) => ({
+  posts: [],
+  isLoading: true,
+  getAllPost: async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/posts/`,
+        { withCredentials: true }
+      );
+      console.log(response.data);
+      set({ posts: response.data.posts, isLoading: false });
+    } catch (err) {
+      console.error(err);
+      set({ posts: null, isLoading: false });
+    }
+  },
 }));

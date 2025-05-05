@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { usePostStore } from "../store/postsStore";
+import { useGetUserPostStore, usePostStore } from "../store/postsStore";
 
 import { Link } from "react-router-dom";
 import { Delete, Loader, Recycle } from "lucide-react";
@@ -15,7 +15,7 @@ const UserPage = () => {
     const val = Math.floor(Math.random() * colorArray.length);
     return colorArray[val];
   };
-  const { posts, getAllPost, isLoading } = usePostStore();
+  const { posts, getAllPost, isLoading } =  useGetUserPostStore()
   const { fetchIfUserLogged, user } = useGetUserStore();
 
   useEffect(() => {
