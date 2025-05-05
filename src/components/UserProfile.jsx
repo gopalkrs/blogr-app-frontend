@@ -33,7 +33,7 @@ const UserProfile = ({ user }) => {
   } = useForm({
     // resolver: zodResolver(login),
     defaultValues: {
-      name: user?.user.name,
+      name: user?.name,
       role: "user",
     },
   });
@@ -50,16 +50,16 @@ const UserProfile = ({ user }) => {
       <div className="flex flex-row gap-2 items-center">
         <div className="flex flex-col items-center gap-1">
           <div className="rounded-full w-10 h-10 uppercase bg-black text-amber-50 flex items-center justify-center font-bold text-center">
-            {user?.user.name.charAt(0)}
+            {user?.name.charAt(0)}
           </div>
-          <span className={`${user?.user.role === "admin"? "bg-red-400": "bg-amber-300"} text-white rounded-full flex items-center justify-center text-center text-xs px-2`}>
-            {user?.user.role}
+          <span className={`${user?.role === "admin"? "bg-gray-700": "bg-amber-300"} text-white rounded-full flex items-center justify-center text-center text-xs px-2`}>
+            {user?.role}
           </span>
         </div>
         <div className="flex flex-col">
-          <h3 className="font-medium text-sm sm:text-md">{user?.user.name}</h3>
+          <h3 className="font-medium text-sm sm:text-md">{user?.name}</h3>
           {/*  */}
-          <p className="text-gray-500 text-xs sm:text-sm">{user?.user.email}</p>
+          <p className="text-gray-500 text-xs sm:text-sm">{user?.email}</p>
         </div>
       </div>
       <div>

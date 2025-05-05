@@ -49,7 +49,7 @@ const Header = () => {
         <Lightbulb className="h-4 w-4 text-white" />
         <h1 className="text-md md:text-lg font-medium text-amber-50">bloggr</h1>
       </Link>
-      {user? (
+      {user ? (
         <div className="flex flex-row gap-5 sm:gap-8 ">
           <div className="flex items-center">
             <DollarSign className="text-amber-100 h-4 w-4 inline sm:hidden" />
@@ -59,9 +59,12 @@ const Header = () => {
             <Link to={"/dashboard"}>
               <LayoutDashboard className="text-amber-100 h-4 w-4 inline sm:hidden" />
             </Link>
-            <h3 className="text-sm text-amber-100 sm:block hidden">
-              <Link to={"/dashboard"}>Dashboard</Link>
-            </h3>
+            <Link
+              className="text-sm text-amber-100 sm:block hidden"
+              to={"/dashboard"}
+            >
+              Dashboard
+            </Link>
           </div>
         </div>
       ) : (
@@ -98,14 +101,17 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-20">
                 <DropdownMenuItem>
-                    <Link to={`/users/${user?.id}`} className="flex items-center gap-1">
-                      <User className="h-4 w-4" />
-                      User
-                    </Link>
+                  <Link
+                    to={`/users/${user?.id}`}
+                    className="flex items-center gap-1"
+                  >
+                    <User className="h-4 w-4" />
+                    User
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className = 'flex items-center gap-1'>
-                    <LogOut className="h-4 w-4" />
-                    Signout
+                <DropdownMenuItem className="flex items-center gap-1">
+                  <LogOut className="h-4 w-4" />
+                  Signout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

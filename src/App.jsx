@@ -7,9 +7,11 @@ import Footer from "./components/Footer";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import ProtectedRoutes from "./protected/ProtectedRoutes";
-import Blogs from "./pages/blogs";
+import Blogs from "./pages/blog-page";
 import UserPage from "./pages/user-page";
 import BlogsDashboard from "./pages/blogs-dashboard";
+import AuthRedirect from "./protected/AuthRedirect";
+import BlogPage from "./pages/blog-page";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -20,10 +22,10 @@ function App() {
       <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/posts/:id" element={<ProtectedRoutes><Blogs /></ProtectedRoutes>} />
+          <Route path="/posts/:id" element={<ProtectedRoutes><BlogPage /></ProtectedRoutes>} />
           <Route path="/create" element={<ProtectedRoutes><CreateBlog /></ProtectedRoutes>} />
-          <Route path="/login" element={<SignIn />} />
-          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<AuthRedirect><SignIn /></AuthRedirect>} />
+          <Route path="/register" element={<AuthRedirect><SignUp /></AuthRedirect>} />
           <Route path="/users/:id" element={<ProtectedRoutes><UserPage /></ProtectedRoutes>} />
           <Route path="/dashboard" element={<ProtectedRoutes><BlogsDashboard /></ProtectedRoutes>} />
         </Routes>

@@ -1,19 +1,13 @@
 import React, { useEffect } from "react";
 import { usePostStore } from "../store/postsStore";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 import { Link } from "react-router-dom";
 import { Delete, Loader, Recycle } from "lucide-react";
 import { Button } from "../components/ui/button";
 import UserProfile from "../components/UserProfile";
 import { useUserStore } from "../store/userStore";
+import { useGetUserStore } from "../store/useGetUserStore";
+import BlogPost from "../components/BlogPost";
 
 const UserPage = () => {
   const colorArray = ["#ffbd00", "#c9ada7", "#ff5400", "#f2e9e4", "#ff0054"];
@@ -21,8 +15,8 @@ const UserPage = () => {
     const val = Math.floor(Math.random() * colorArray.length);
     return colorArray[val];
   };
-  const { posts, getAllPost, isLoading, deletePostWithId } = usePostStore();
-  const { fetchIfUserLogged, user } = useUserStore();
+  const { posts, getAllPost, isLoading } = usePostStore();
+  const { fetchIfUserLogged, user } = useGetUserStore();
 
   useEffect(() => {
     getAllPost();
@@ -40,7 +34,7 @@ const UserPage = () => {
       </div>
     );
   }
-  if (posts.length === 0) {
+  if (posts?.length === 0) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader className="w-8 h-8 animate-spin" />
@@ -51,7 +45,7 @@ const UserPage = () => {
     return (
       <div className="max-w-4xl px-4 mx-auto m-10 min-h-screen space-y-20">
         <UserProfile user={user} />
-        {user.user.role === "admin" ? (
+        {user.role === "admin" ? (
           <div className="flex items-center flex-col justify-center space-y-6">
             <h3 className="text-md font-medium">No post exists!</h3>
 
@@ -75,29 +69,7 @@ const UserPage = () => {
       <UserProfile user={user} />
       <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 md:grid-cols-2 sm:gap-8">
         {posts && posts?.map((post, index) => (
-          <Card key={index} className="relative shadow-md bg-white">
-            <Delete
-              onClick={() => deletePostWithId(post?._id)}
-              className="absolute right-5 top-1 w-5 h-5 cursor-pointer"
-            />
-            <CardHeader className="flex items-center justify-center border-b border-gray-100 py-2">
-              <CardTitle className="text-center font-bold text-md pb-2">
-                {post.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground text-center">
-                {post.content.length > 100
-                  ? `${post.content.substring(0, 100)}...`
-                  : post.content}
-                {post.content.length > 100 && (
-                  <span className="text-blue-500">
-                    <Link to={`/posts/${post._id}`}>Read more</Link>
-                  </span>
-                )}
-              </p>
-            </CardContent>
-          </Card>
+          <BlogPost post={post} key={index} user={user} />
         ))}
       </div>
       <div className="flex flex-col items-center justify-between p-4 space-y-3 sm:space-y-5 mt-10">
