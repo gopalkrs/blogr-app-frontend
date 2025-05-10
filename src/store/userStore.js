@@ -36,8 +36,8 @@ export const useUserStore = create((set) => ({
     console.log(response.data);
     set({ user: response.data.user, isLoading: false });
   },
-  logOutUser: () => {
-    const response = axios.post(
+  logOutUser: async () => {
+    const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/users/logout`,
       {},
       { withCredentials: true }
@@ -45,14 +45,14 @@ export const useUserStore = create((set) => ({
     console.log(response.data);
     set({ user: null, isLoading: false });
   },
-  updateUser: (userdata) => {
-    const response = axios.patch(
+  updateUser: async (userdata) => {
+    const response = await axios.patch(
       `${import.meta.env.VITE_API_URL}/users/logged`,
       userdata,
       { withCredentials: true }
     );
     console.log(response.data);
-    set({ isLoading: false });
+    set({user: response.data.user, isLoading: false });
   },
   clearUser: () => set({ user: null }),
 }));

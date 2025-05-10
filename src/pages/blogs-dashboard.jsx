@@ -10,14 +10,13 @@ import {
 } from "@/components/ui/card";
 import { Button } from "../components/ui/button";
 import { Loader, Plus, User, UserCircle, UserCircle2Icon } from "lucide-react";
-import { allPostStore } from "../store/allPostStore";
+import { useGetAllPostStore } from "../store/useGetAllPostStore";
 import { Link } from "react-router-dom";
-import { useUserStore } from "../store/userStore";
 import BlogPost from "../components/BlogPost";
 import { useGetUserStore } from "../store/useGetUserStore";
 
 const BlogsDashboard = () => {
-  const { posts, getAllPostsCreated, isLoading } = allPostStore();
+  const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
   const { user, fetchIfUserLogged } = useGetUserStore();
 
   useEffect(() => {

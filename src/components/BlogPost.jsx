@@ -7,20 +7,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import DOMPurify from "dompurify";
 import { usePostStore } from "../store/postsStore";
 import { Delete, ShieldUser, User, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import { useGetAllPostStore } from "../store/useGetAllPostStore";
+import truncate from "html-truncate";
 
 const BlogPost = ({ post, user }) => {
   const { deletePostWithId } = usePostStore();
+  const { getAllPostsCreated } = useGetAllPostStore();
+  const preview = truncate(post?.content, 100);
+  const sanitized = DOMPurify.sanitize(preview);
+
+  const deletePostHandler = async (id) => {
+    await deletePostWithId(id);
+    await getAllPostsCreated();
+  };
 
   return (
     <div>
       <Card className="relative shadow-md bg-white">
         {post.userId === user.id && (
           <Delete
-            onClick={() => deletePostWithId(post?._id)}
+            onClick={() => deletePostHandler(post?._id)}
             className="absolute right-5 top-1 w-5 h-5 cursor-pointer"
           />
         )}
@@ -30,7 +41,7 @@ const BlogPost = ({ post, user }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground text-center">
+          {/* <p className="text-sm text-muted-foreground text-center">
             {post.content.length > 100
               ? `${post.content.substring(0, 100)}...`
               : post.content}
@@ -39,17 +50,28 @@ const BlogPost = ({ post, user }) => {
                 <Link to={`/posts/${post._id}`}>Read more</Link>
               </span>
             )}
-          </p>
+          </p> */}
+          <div className="text-sm text-muted-foreground">
+            <div
+              className="prose"
+              dangerouslySetInnerHTML={{ __html: sanitized }}
+            />
+            {post.content.length > 100 && (
+              <span className="text-blue-500">
+                <Link to={`/posts/${post._id}`}>Read more</Link>
+              </span>
+            )}
+          </div>
         </CardContent>
         <CardFooter className="flex flex-row items-center justify-around">
           <div className="flex items-center flex-col">
             <div className="flex flex-row items-center gap-1">
               {post?.user[0].role === "admin" ? (
-                <ShieldUser className="h-4 w-4 text-gray-700" />
+                <ShieldUser className="h-4 w-4 text-gray-300" />
               ) : (
                 <UserRound className="w-3 h-3 text-amber-500" />
               )}
-              <p className="text-gray-600 text-sm font-light">
+              <p className="text-gray-400 text-sm font-light">
                 {post?.user[0].name}
               </p>
             </div>

@@ -24,7 +24,7 @@ export const usePostStore = create((set) => ({
         `${import.meta.env.VITE_API_URL}/posts/${id}`,
         { withCredentials: true }
       );
-      console.log(response.data.posts[0].user[0]);
+      //console.log(response.data.posts[0].user[0]);
       set({ posts: response.data.posts[0], isLoading: false });
     } catch (err) {
       console.error(err);
@@ -37,9 +37,9 @@ export const usePostStore = create((set) => ({
         `${import.meta.env.VITE_API_URL}/posts/${id}`,
         { withCredentials: true }
       );
-      console.log(response.data);
-      set({ posts: response.data.posts, isLoading: false });
-      window.location.reload();
+      //console.log(response.data);
+      set({ isLoading: false });
+      
     } catch (err) {
       console.error(err);
       set({ isLoading: false });
@@ -57,7 +57,7 @@ export const useGetUserPostStore = create((set) => ({
         `${import.meta.env.VITE_API_URL}/posts/`,
         { withCredentials: true }
       );
-      console.log(response.data);
+      //console.log(response.data);
       set({ posts: response.data.posts, isLoading: false });
     } catch (err) {
       console.error(err);

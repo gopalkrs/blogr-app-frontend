@@ -1,5 +1,5 @@
 import { Pencil, UserCircle } from "lucide-react";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useUserStore } from "../store/userStore";
 import { Button } from "./ui/button";
 import {
@@ -21,8 +21,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
+import { useGetUserStore } from "../store/useGetUserStore";
 
 const UserProfile = ({ user }) => {
+
+
   const {
     register,
     handleSubmit,
@@ -39,10 +42,14 @@ const UserProfile = ({ user }) => {
   });
 
   const { updateUser } = useUserStore();
+  const { fetchIfUserLogged } = useGetUserStore();
+  const [open, setOpen] = useState(false);
 
-  const updateUserHandler = (userdata) => {
-    updateUser(userdata);
-    window.location.reload();
+  const updateUserHandler = async (userdata) => {
+    await updateUser(userdata);
+    await fetchIfUserLogged();
+    setOpen(false)
+    //window.location.reload();
   };
 
   return (
@@ -63,7 +70,7 @@ const UserProfile = ({ user }) => {
         </div>
       </div>
       <div>
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger className="flex flex-row text-sm items-center rounded-full gap-1 px-2 py-1 bg-blue-500 text-white">
             <Pencil className="sm:h-4 sm:w-4 h-3 w-3" />
             Edit

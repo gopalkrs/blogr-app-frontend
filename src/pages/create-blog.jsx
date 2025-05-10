@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -14,6 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
@@ -22,12 +24,18 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useUserStore } from "../store/userStore";
 import { usePostStore } from "../store/postsStore";
 import { useGetUserStore } from "../store/useGetUserStore";
-
-// import { zodResolver } from '@hookform/resolvers/zod'
+import TiptapEditor from "../components/TiptapEditor";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { blogSchema } from "../validations/blogSchema";
 
 const CreateBlog = () => {
   const navigate = useNavigate();
-
+  const [content, setContent] = useState("");
+  const onChangeHandler = (html) => {
+    console.log(html);
+    setContent(html);
+    setValue("content", html);
+  }
   const {
     register,
     handleSubmit,
@@ -36,7 +44,7 @@ const CreateBlog = () => {
     watch,
     formState: { errors },
   } = useForm({
-    // resolver: zodResolver(login),
+    resolver: zodResolver(blogSchema),
     defaultValues: {
       title: "",
       content: "",
@@ -45,7 +53,6 @@ const CreateBlog = () => {
 
   const { createNewPost } = usePostStore();
   const { user, fetchIfUserLogged, isLoading } = useGetUserStore();
-
   useEffect(()=>{
     fetchIfUserLogged();
   },[])
@@ -81,17 +88,14 @@ const CreateBlog = () => {
               )}
             </div>
 
-            <div className="flex flex-col gap-2 items-start text-muted-foreground">
+            <div className="flex flex-col gap-2 text-muted-foreground">
               {/* <label
                 className="font-bold text-xs text-gray-300"
                 htmlFor="content"
               >
                 Content
               </label> */}
-              <Textarea
-                placeholder="content goes here..."
-                {...register("content")}
-              />
+              <TiptapEditor content={content} onChange={onChangeHandler} />
               {errors.content && (
                 <p className="text-red-500 text-xs">{errors.content.message}</p>
               )}

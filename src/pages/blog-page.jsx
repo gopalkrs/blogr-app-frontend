@@ -4,6 +4,7 @@ import { usePostStore } from "../store/postsStore";
 import { Loader, MoveLeft } from "lucide-react";
 import { format } from "date-fns";
 import { Button } from "../components/ui/button";
+import DOMPurify from "dompurify";
 import { useGetUserStore } from "../store/useGetUserStore";
 
 const BlogPage = () => {
@@ -32,7 +33,7 @@ const BlogPage = () => {
         className="text-blue-500 bg-transparent my-10 mx-5 hover:none"
       >
         <Link
-          to={`/users/${user?.id}`}
+          to={`/dashboard`} /*/users/${user?.id}*/
           className="flex flex-row items-center gap-1"
         >
           <MoveLeft /> dashboard
@@ -45,11 +46,11 @@ const BlogPage = () => {
         <div className="flex items-center justify-between">
           {posts?.user && (
             <div className="flex flex-col items-center gap-1">
-              <p className="text-gray-600 text-sm font-light">
+              <p className="text-gray-400 text-sm font-light">
                 {posts?.user[0].name}
               </p>
               {posts?.user && posts?.user[0].role === "admin" ? (
-                <span className="bg-gray-700 text-white rounded-full flex items-center justify-center text-center text-xs px-2">
+                <span className="bg-gray-300 text-white rounded-full flex items-center justify-center text-center text-xs px-2">
                   {posts?.user[0].role}
                 </span>
               ) : (
@@ -65,7 +66,11 @@ const BlogPage = () => {
         </div>
 
         <article className=" text-gray-800">
-          <p className="py-5 text-sm sm:text-xl">{posts.content}</p>
+          <div
+            className="prose py-5 text-sm sm:text-xl"
+            dangerouslySetInnerHTML={{ __html: posts.content }}
+          />
+          {/* <p className="py-5 text-sm sm:text-xl">{posts.content}</p> */}
         </article>
       </div>
     </div>
