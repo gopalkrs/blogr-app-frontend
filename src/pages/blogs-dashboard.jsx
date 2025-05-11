@@ -51,14 +51,16 @@ const BlogsDashboard = () => {
         ))}
       </div>
       {user.role === "admin" ? (
+        <div className="sticky bottom-6 flex justify-end">
         <Button
           variant={"outline"}
-          className="fixed text-xs sm:text-md py-2 px-2 hover:bg-blue-400 hover:text-amber-100 transition-all delay-2 ease-in-out text-white bg-blue-500 bottom-1 right-1 z-10"
+          className="text-xs sm:text-md py-2 px-2 hover:bg-blue-400 hover:text-amber-100 transition-all delay-2 ease-in-out text-white bg-blue-500 bottom-6 right-6 z-50"
         >
           <Link className="flex items-center gap-1 flex-row" to={'/create'}>
             Create New <Plus className="h-3 w-3" />
           </Link>
         </Button>
+        </div>
       ) : (
         <></>
       )}
