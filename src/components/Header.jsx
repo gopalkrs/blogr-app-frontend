@@ -23,17 +23,24 @@ import {
 
 import React, { useEffect } from "react";
 import { Button } from "./ui/button";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 //import { useUserStore } from "../store/userStore";
 import { useGetUserStore } from "../store/useGetUserStore";
 import { useUserStore } from "../store/userStore";
 
 const Header = () => {
   const { fetchIfUserLogged, isLoading, user } = useGetUserStore();
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchIfUserLogged();
   }, []);
+
+  const { logOutUser } = useUserStore();
+  const logoutUserHandler = async () => {
+    await logOutUser();
+    navigate("/");
+    window.location.reload();
+  }
 
   if (isLoading) {
     return (
@@ -44,7 +51,7 @@ const Header = () => {
   }
 
   return (
-    <div className="flex flex-row justify-between gap-1 items-center p-4 bg-black shadow-md">
+    <div className="flex flex-row justify-between gap-1 items-center p-4 bg-gray-800 shadow-md">
       <Link to={"/"} className="flex flex-row items-center">
         <Lightbulb className="h-4 w-4 text-white" />
         <h1 className="text-md md:text-lg font-medium text-amber-50">bloggr</h1>
@@ -109,15 +116,17 @@ const Header = () => {
                     User
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center gap-1">
-                  <LogOut className="h-4 w-4" />
-                  Signout
+                <DropdownMenuItem>
+                  <Button onClick={logoutUserHandler} variant={"secondary"} className="bg-transparent font-light flex items-center gap-1">
+                    <LogOut className="h-4 w-4" />
+                    Signout
+                  </Button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <Button>
-              <Link to={"/login"}>SignUp</Link>
+              <Link to={"/register"}>SignUp</Link>
             </Button>
           )}
         </div>

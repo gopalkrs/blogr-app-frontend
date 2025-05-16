@@ -54,15 +54,12 @@ const SignUp = () => {
   }, [user, navigate]);
   
   const onSubmitHandler = async (data) => {
-    console.log(data)
     await registerUser(data)
-    console.log(user);
+    //console.log(user);
     reset();
-    if (user) {
-        <Navigate to="/" replace={true} />;
-    }
-
-}
+    navigate("/");
+    window.location.reload();
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4">
@@ -76,38 +73,23 @@ const SignUp = () => {
             onSubmit={handleSubmit(onSubmitHandler)}
           >
             <div className="flex flex-col gap-2 items-start text-muted-foreground">
-              <label
-                className="font-bold text-xs text-gray-300"
-                htmlFor="name"
-              >
-                Name
-              </label>
-              <Input placeholder="jos buttler" {...register("name")} />
+              
+              <Input placeholder="joe rogan" {...register("name")} />
               {errors.name && (
                 <p className="text-red-500 text-xs">{errors.name.message}</p>
               )}
             </div>
             <div className="flex flex-col gap-2 items-start text-muted-foreground">
-              <label
-                className="font-bold text-xs text-gray-300"
-                htmlFor="email"
-              >
-                Email
-              </label>
+              
               <Input placeholder="jb@abc.com" {...register("email")} />
               {errors.email && (
                 <p className="text-red-500 text-xs">{errors.email.message}</p>
               )}
             </div>
             <div className="flex flex-col gap-2 items-start text-muted-foreground">
-              <label
-                className="font-bold text-xs text-gray-300"
-                htmlFor="email"
-              >
-                Password
-              </label>
+             
               <Input
-                placeholder="****"
+                placeholder="******"
                 type="password"
                 {...register("password")}
               />
@@ -119,7 +101,7 @@ const SignUp = () => {
             </div>
             <div>
               <Select onValueChange={(value) => setValue("role", value)}>
-                <label className="font-bold text-xs text-gray-300">Role</label>
+                
                 <SelectTrigger id='role' className="w-[50%]">
                   <SelectValue placeholder="Select Role" />
                 </SelectTrigger>

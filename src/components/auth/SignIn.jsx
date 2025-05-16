@@ -36,7 +36,7 @@ const SignIn = () => {
     });
 
     const onSubmitHandler = async (data) => {
-        //console.log(data)
+        console.log(data)
         await loginUser(data);
         navigate("/");
         window.location.reload();
@@ -46,14 +46,13 @@ const SignIn = () => {
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
 
-            <Card className='lg:w-[40%] sm:w-[60%] w-[90%] max-h-[80vh] overflow-auto shadow-md'>
+            <Card className='lg:w-[30%] sm:w-[60%] w-[90%] max-h-[80vh] overflow-auto shadow-md'>
                 <CardHeader className=''>
                     <CardTitle className='text-center'>Sign-In</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
                         <div className='flex flex-col gap-2 items-start text-muted-foreground'>
-                            <label className='font-bold text-xs text-gray-300' htmlFor="email">Email</label>
                             <Input
                                 placeholder="jdoe@abc.com"
                                 {...register("email")}
@@ -61,7 +60,6 @@ const SignIn = () => {
                             {errors.email && <p className='text-red-500 text-xs'>{errors.email.message}</p>}
                         </div>
                         <div className='flex flex-col gap-2 items-start text-muted-foreground'>
-                            <label className='font-bold text-xs text-gray-300' htmlFor="email">Password</label>
                             <Input
                                 placeholder="****"
                                 type='password'

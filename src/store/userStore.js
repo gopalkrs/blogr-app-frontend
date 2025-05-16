@@ -37,9 +37,8 @@ export const useUserStore = create((set) => ({
     set({ user: response.data.user, isLoading: false });
   },
   logOutUser: async () => {
-    const response = await axios.post(
+    const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/users/logout`,
-      {},
       { withCredentials: true }
     );
     console.log(response.data);
