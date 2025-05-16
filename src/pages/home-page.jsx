@@ -35,7 +35,7 @@ const HomePage = () => {
               <Link to={"/create"}>Get Started</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link to={"/blogs"}>Explore Blogs</Link>
+              <Link to={"/dashboard"}>Explore Blogs</Link>
             </Button>
           </div>
         </div>
@@ -53,7 +53,7 @@ const HomePage = () => {
           >
             <PenToolIcon className="mx-auto mb-2 text-blue-500 h-6 w-6" />
             <h3 className="font-semibold">Easy to Use</h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-100">
               A clean editor that lets you focus on writing.
             </p>
           </motion.div>
@@ -65,7 +65,7 @@ const HomePage = () => {
           >
             <RocketIcon className="mx-auto mb-2 text-blue-500 h-6 w-6" />
             <h3 className="font-semibold">Instant Publishing</h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-100">
               Your stories go live with just one click.
             </p>
           </motion.div>
@@ -77,7 +77,7 @@ const HomePage = () => {
           >
             <UsersIcon className="mx-auto mb-2 text-blue-500 h-6 w-6" />
             <h3 className="font-semibold">Grow Your Audience</h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-100">
               Share and connect with fellow bloggers.
             </p>
           </motion.div>
