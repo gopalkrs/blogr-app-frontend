@@ -1,13 +1,44 @@
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
-import { PenToolIcon, RocketIcon, UsersIcon } from "lucide-react";
+import { MoveLeft, MoveRight, PenToolIcon, RocketIcon, UsersIcon } from "lucide-react";
 //import motion from "motion";
 import * as motion from "motion/react-client";
+import { useGetAllPostStore } from "../store/useGetAllPostStore";
+import RecentPostSlider from "../components/RecentPostSlider";
+import { AnimatePresence } from "framer-motion";
+import TestimonialSection from "../components/TestimonialSection";
 
 const HomePage = () => {
+  const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
+
+  const [index, setIndex] = useState(0);
+
+  const goToNext = () => {
+    setIndex((prevIndex) => (prevIndex + 1) % 4);
+  };
+
+  const goToPrev = () => {
+    setIndex((prevIndex) => (prevIndex - 1 + 4) % 4);
+  };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      await getAllPostsCreated();
+    };
+    fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      goToNext();
+    }, 3000); // Change slide every 2 seconds
+
+    return () => clearInterval(interval); // Cleanup the interval on component unmount so it doesn't keep running
+  }, [index]);
+
   return (
     <div>
       <section className="flex flex-col sm:flex-row-reverse items-center sm:gap-10 gap-2 justify-center h-screen px-6 md:px-16 py-20 bg-gray-50">
@@ -40,7 +71,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section className="bg-slate-100 py-12 px-6 md:px-16">
+      <section className="bg-white py-12 px-6 md:px-16">
         <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">
           Why Bloggr?
         </h2>
@@ -83,9 +114,27 @@ const HomePage = () => {
           </motion.div>
         </div>
       </section>
-      <section>
-        <h2>Latest Blogs</h2>
-        {/* <BlogPreviewCard title="..." author="..." snippet="..." /> */}
+      <section className="bg-slate-100 py-12 px-6 md:px-16">
+        <h2 className="text-center text-xl font-bold">Just Dropped: New Reads</h2>
+        <div className="w-full max-w-xl mx-auto relative p-4">
+          <div className="relative h-64 overflow-hidden">
+            <AnimatePresence mode="wait">
+              {posts?.slice(-4).map((post, ind) => 
+              ind === index? (
+                <RecentPostSlider key={index} index={index} post={post} />
+              ) : null )}
+            </AnimatePresence>
+          </div>
+
+          {/* controls
+          <div className="flex justify-between mt-4">
+            <button className="text-lg px-4 py-2" onClick={goToPrev}><MoveLeft /></button>
+            <button className="text-lg px-4 py-2" onClick={goToNext}><MoveRight /></button>
+          </div> */}
+        </div>
+      </section>
+      <section className="">
+        <TestimonialSection />
       </section>
     </div>
   );
