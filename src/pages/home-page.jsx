@@ -80,9 +80,9 @@ const HomePage = () => {
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center bg-blue-200 text-white p-6 rounded-lg shadow-md"
+            className="flex flex-col items-center bg-gray-800 text-white p-6 rounded-lg shadow-md"
           >
-            <PenToolIcon className="mx-auto mb-2 text-blue-500 h-6 w-6" />
+            <PenToolIcon className="mx-auto mb-2 text-red-500 h-6 w-6" />
             <h3 className="font-semibold">Easy to Use</h3>
             <p className="text-sm text-gray-100">
               A clean editor that lets you focus on writing.
@@ -92,9 +92,9 @@ const HomePage = () => {
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center bg-blue-200 text-white p-6 rounded-lg shadow-md"
+            className="flex flex-col items-center  bg-gray-800 text-white p-6 rounded-lg shadow-md"
           >
-            <RocketIcon className="mx-auto mb-2 text-blue-500 h-6 w-6" />
+            <RocketIcon className="mx-auto mb-2 text-amber-500 h-6 w-6" />
             <h3 className="font-semibold">Instant Publishing</h3>
             <p className="text-sm text-gray-100">
               Your stories go live with just one click.
@@ -104,9 +104,9 @@ const HomePage = () => {
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center bg-blue-200 text-white p-6 rounded-lg shadow-md"
+            className="flex flex-col items-center  bg-gray-800 text-white p-6 rounded-lg shadow-md"
           >
-            <UsersIcon className="mx-auto mb-2 text-blue-500 h-6 w-6" />
+            <UsersIcon className="mx-auto mb-2 text-green-500 h-6 w-6" />
             <h3 className="font-semibold">Grow Your Audience</h3>
             <p className="text-sm text-gray-100">
               Share and connect with fellow bloggers.
@@ -114,7 +114,7 @@ const HomePage = () => {
           </motion.div>
         </div>
       </section>
-      <section className="bg-slate-100 py-12 px-6 md:px-16">
+      <section className="bg-cyan-100 py-12 px-6 md:px-16">
         <h2 className="text-center text-xl font-bold">Just Dropped: New Reads</h2>
         <div className="w-full max-w-xl mx-auto relative p-4">
           <div className="relative h-64 overflow-hidden">

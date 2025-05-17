@@ -28,7 +28,7 @@ const BlogPost = ({ post, user }) => {
 
   return (
     <div>
-      <Card className="relative h-full shadow-md bg-amber-100">
+      <Card className="relative h-full shadow-md bg-slate-100">
         {post.userId === user.id && (
           <Delete
             onClick={() => deletePostHandler(post?._id)}

@@ -23,7 +23,7 @@ const RecentPostSlider = ({ post }) => {
 
   return (
           <motion.div
-            className="absolute flex h-full md:h-8/12 w-full flex-col rounded-sm shadow-md bg-amber-100 p-4"
+            className="absolute flex h-full md:h-8/12 w-full flex-col rounded-md shadow-md bg-slate-50 p-4"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
