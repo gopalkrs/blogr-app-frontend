@@ -12,6 +12,8 @@ import UserPage from "./pages/user-page";
 import BlogsDashboard from "./pages/blogs-dashboard";
 import AuthRedirect from "./protected/AuthRedirect";
 import BlogPage from "./pages/blog-page";
+import { Toaster } from "sonner";
+import 'sonner';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -29,6 +31,7 @@ function App() {
           <Route path="/users/:id" element={<ProtectedRoutes><UserPage /></ProtectedRoutes>} />
           <Route path="/dashboard" element={<ProtectedRoutes><BlogsDashboard /></ProtectedRoutes>} />
         </Routes>
+        <Toaster richColors />
         <Footer />
       </div>
     </>

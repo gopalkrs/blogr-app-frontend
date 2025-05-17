@@ -12,7 +12,8 @@ export const usePostStore = create((set) => ({
         { withCredentials: true }
       );
       //console.log(response.data);
-      set({ isLoading: false });
+      set({ isLoading: false,  });
+      return response.data;
     } catch (err) {
       console.error(err);
       set({ posts: null, isLoading: false });

@@ -114,9 +114,9 @@ const SignUp = () => {
             <Button
               disabled={false}
               type="submit"
-              className="my-6 bg-blue-400 hover:bg-blue-600"
+              className="my-6 bg-gray-800 hover:bg-gray-600"
             >
-              Login
+              Sign Up
             </Button>
             <p className="text-center text-sm text-gray-400">
               Don&apos;t have an account?

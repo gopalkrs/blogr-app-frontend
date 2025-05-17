@@ -35,6 +35,17 @@ const SignIn = () => {
         }
     });
 
+    const guestLoginHandler = async () => {
+        const guestData = {
+            email: "guestuser@abc.com",
+            password: "123456"
+        }
+        reset(guestData);
+        await loginUser(guestData);
+        navigate("/");
+        window.location.reload();
+    }
+
     const onSubmitHandler = async (data) => {
         console.log(data)
         await loginUser(data);
@@ -67,11 +78,14 @@ const SignIn = () => {
                             />
                             {errors.password && <p className='text-red-500 text-xs'>{errors.password.message}</p>}
                         </div>
-                        <Button disabled={false} type='submit' className='my-6 bg-blue-400 hover:bg-blue-600'>Login</Button>
+                        <Button disabled={false} type='submit' className='my-6 bg-gray-800 hover:bg-gray-600'>Login</Button>
                         <p className='text-center text-sm text-gray-400'>
                             Don&apos;t have an account?
                             <Link to='/register' className='text-blue-400'> Sign Up</Link>
                         </p>
+                        <Button type='submit' onClick={guestLoginHandler} variant='outline' className='my-6 bg-gray-200 hover:bg-gray-300'>
+                            Guest Login
+                        </Button>
                     </form>
                     {/* <div className="flex items-center gap-4 w-full my-6">
                         <span className="flex-grow h-px bg-gray-300" />

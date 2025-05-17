@@ -14,6 +14,7 @@ import { useGetAllPostStore } from "../store/useGetAllPostStore";
 import { Link } from "react-router-dom";
 import BlogPost from "../components/BlogPost";
 import { useGetUserStore } from "../store/useGetUserStore";
+import { motion } from "framer-motion";
 
 const BlogsDashboard = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
@@ -44,7 +45,13 @@ const BlogsDashboard = () => {
   }
 
   return (
-    <section className="relative w-full max-w-4xl mx-auto px-4 space-y-4 m-10 min-h-screen">
+    <motion.section
+      initial={{ x: -500, opacity: 0 }}
+      exit={{ x: -500, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="relative w-full max-w-4xl mx-auto px-4 space-y-4 m-10 min-h-screen"
+    >
       <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 sm:gap-8">
         {posts?.map((post, index) => (
           <BlogPost post={post} user={user} key={index} />
@@ -52,19 +59,19 @@ const BlogsDashboard = () => {
       </div>
       {user.role === "admin" ? (
         <div className="sticky bottom-6 flex justify-end">
-        <Button
-          variant={"outline"}
-          className="text-xs sm:text-md py-2 px-2 hover:bg-gray-900 hover:text-amber-100 transition-all delay-2 ease-in-out text-white bg-black bottom-6 right-6 z-50"
-        >
-          <Link className="flex items-center gap-1 flex-row" to={'/create'}>
-            Create New <Plus className="h-3 w-3" />
-          </Link>
-        </Button>
+          <Button
+            variant={"outline"}
+            className="text-xs sm:text-md py-2 px-2 hover:bg-gray-900 hover:text-amber-100 transition-all delay-2 ease-in-out text-white bg-black bottom-6 right-6 z-50"
+          >
+            <Link className="flex items-center gap-1 flex-row" to={"/create"}>
+              Create New <Plus className="h-3 w-3" />
+            </Link>
+          </Button>
         </div>
       ) : (
         <></>
       )}
-    </section>
+    </motion.section>
   );
 };
 

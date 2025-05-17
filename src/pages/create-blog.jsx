@@ -14,8 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
@@ -25,17 +25,18 @@ import { useUserStore } from "../store/userStore";
 import { usePostStore } from "../store/postsStore";
 import { useGetUserStore } from "../store/useGetUserStore";
 import TiptapEditor from "../components/TiptapEditor";
-import { zodResolver } from '@hookform/resolvers/zod'
+import { zodResolver } from "@hookform/resolvers/zod";
 import { blogSchema } from "../validations/blogSchema";
+import { toast, Toaster } from "sonner";
+import { motion } from "framer-motion";
 
 const CreateBlog = () => {
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   const onChangeHandler = (html) => {
-    console.log(html);
     setContent(html);
     setValue("content", html);
-  }
+  };
   const {
     register,
     handleSubmit,
@@ -53,19 +54,39 @@ const CreateBlog = () => {
 
   const { createNewPost } = usePostStore();
   const { user, fetchIfUserLogged, isLoading } = useGetUserStore();
-  useEffect(()=>{
+  useEffect(() => {
     fetchIfUserLogged();
-  },[])
+  }, []);
 
   const onSubmitHandler = async (data) => {
-    console.log(data);
     const response = await createNewPost(data);
     console.log(response);
+
+    if (response?.success) {
+      toast.success("Post created successfully");
+      reset();
+      setValue("content", "");
+      setContent("");
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 300);
+    } else {
+      toast.error("Error creating post");
+      setValue("content", "");
+      setContent("");
+    }
     reset();
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+    <motion.div
+      initial={{ x: 0, opacity: 1 }}
+      exit={{ x: 500, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="flex flex-col items-center justify-center min-h-screen p-4"
+    >
       <Card className="lg:w-[40%] sm:w-[60%] w-[90%] max-h-[80vh] overflow-auto shadow-md">
         <CardHeader className="">
           <CardTitle className="text-center">Create new blog</CardTitle>
@@ -103,7 +124,7 @@ const CreateBlog = () => {
             <Button
               disabled={false}
               type="submit"
-              className="my-6 bg-blue-400 hover:bg-blue-600"
+              className="my-6 bg-gray-800 hover:bg-gray-600"
             >
               Post
             </Button>
@@ -114,13 +135,13 @@ const CreateBlog = () => {
       <div className="my-6 flex flex-col items-center text-center">
         <p className="text-sm text-gray-600">
           Want to see your blogs posts?
-          <Button className='text-blue-500 font-medium px-2' variant={'link'} >
+          <Button className="text-blue-500 font-medium px-2" variant={"link"}>
             <Link to={`/users/${user?.id}`}>Click here</Link>
           </Button>
           to view.
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
