@@ -1,12 +1,50 @@
-# React + Vite
+# 📝 Blogr App (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack blogging platform built with **React**, **Zustand**, and **Tailwind CSS**, featuring user authentication, blog CRUD operations, and clean responsive design.  
+The backend is developed separately and integrated via REST APIs.  
+Live deployment available on **Vercel**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React.js, Zustand, Tailwind CSS, Axios
+- **Backend**: Node.js, Express (separate repo)
+- **Database**: MongoDB / PostgreSQL
+- **Deployment**: Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🔑 Key Features
+
+- ✅ User Authentication (Login / Register)
+- ✅ Blog CRUD Operations (Create, Read, Update, Delete)
+- ✅ RESTful API Integration
+- ✅ Global State Management with Zustand
+- ✅ Fully Responsive UI (Mobile-first)
+- ✅ Deployed with CI/CD on Vercel
+
+---
+
+## 🌐 Live Demo
+
+> https://blogr-app-frontend.vercel.app/
+
+---
+
+## 🧩 Folder Structure
+
+```bash
+blogr-app-frontend/
+│
+├── public/             # Static files
+├── src/
+│   ├── components/     # UI Components
+│   ├── pages/          # React Router Pages
+│   ├── store/          # Zustand state management
+│   ├── services/       # API calls (Axios)
+│   └── utils/          # Utility functions
+│
+├── .env.local          # Environment variables
+├── package.json
+└── README.md
