@@ -29,6 +29,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { blogSchema } from "../validations/blogSchema";
 import { toast, Toaster } from "sonner";
 import { motion } from "framer-motion";
+import axios from "axios";
+import ImageUploader from "../components/ImageUploader";
 
 const CreateBlog = () => {
   const navigate = useNavigate();
@@ -49,6 +51,7 @@ const CreateBlog = () => {
     defaultValues: {
       title: "",
       content: "",
+      imageUrl: "",
     },
   });
 
@@ -87,11 +90,10 @@ const CreateBlog = () => {
       transition={{ duration: 0.3 }}
       className="flex flex-col items-center justify-center min-h-screen p-4"
     >
-      <Card className="lg:w-[40%] sm:w-[60%] w-[90%] max-h-[80vh] overflow-auto shadow-md">
-        <CardHeader className="">
-          <CardTitle className="text-center">Create new blog</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="space-y-10">
+        <h2 className="text-center text-xl font-bold">Create New Blog</h2>
+        <div className="flex flex-col gap-2">
+        <ImageUploader setValue={setValue} />
           <form
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(onSubmitHandler)}
@@ -103,6 +105,7 @@ const CreateBlog = () => {
               >
                 Title
               </label> */}
+              
               <Input placeholder="Title" {...register("title")} />
               {errors.title && (
                 <p className="text-red-500 text-xs">{errors.title.message}</p>
@@ -124,13 +127,13 @@ const CreateBlog = () => {
             <Button
               disabled={false}
               type="submit"
-              className="my-6 bg-gray-800 hover:bg-gray-600"
+              className="my-6 bg-orange-500 hover:bg-gray-600"
             >
               Post
             </Button>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <div className="my-6 flex flex-col items-center text-center">
         <p className="text-sm text-gray-600">

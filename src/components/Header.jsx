@@ -51,7 +51,7 @@ const Header = () => {
   }
 
   return (
-    <div className="flex flex-row justify-between gap-1 items-center p-4 bg-gray-800 shadow-md">
+    <div className="flex flex-row justify-between gap-1 items-center p-4 bg-orange-400 shadow-md">
       <Link to={"/"} className="flex flex-row items-center">
         <Lightbulb className="h-4 w-4 text-white" />
         <h1 className="text-md md:text-lg font-medium text-amber-50">bloggr</h1>
@@ -59,15 +59,15 @@ const Header = () => {
       {user ? (
         <div className="flex flex-row gap-5 sm:gap-8 ">
           <div className="flex items-center">
-            <DollarSign className="text-amber-100 h-4 w-4 inline sm:hidden" />
-            <h3 className="text-sm text-amber-100 sm:block hidden">Pricing</h3>
+            <DollarSign className="text-white h-4 w-4 inline sm:hidden" />
+            <h3 className="text-sm text-white sm:block hidden">Pricing</h3>
           </div>
           <div className="flex items-center">
-            <Link to={"/dashboard"}>
-              <LayoutDashboard className="text-amber-100 h-4 w-4 inline sm:hidden" />
+            <Link className="flex items-center" to={"/dashboard"}>
+              <LayoutDashboard className="text-white h-4 w-4 inline sm:hidden" />
             </Link>
             <Link
-              className="text-sm text-amber-100 sm:block hidden"
+              className="text-sm text-white sm:block hidden"
               to={"/dashboard"}
             >
               Dashboard
@@ -78,21 +78,21 @@ const Header = () => {
         <div className="flex flex-row gap-5 sm:gap-8 ">
           <div className="flex items-center">
             <DollarSign className="text-amber-100 h-4 w-4 inline sm:hidden" />
-            <h3 className="text-sm text-amber-100 sm:block hidden">Pricing</h3>
+            <h3 className="text-sm text-white sm:block hidden">Pricing</h3>
           </div>
           <div className="flex items-center">
-            <Zap className="text-amber-100 h-4 w-4 inline sm:hidden" />
-            <h3 className="text-sm text-amber-100 sm:block hidden">Features</h3>
+            <Zap className="text-white h-4 w-4 inline sm:hidden" />
+            <h3 className="text-sm text-white sm:block hidden">Features</h3>
           </div>
           <div className="flex items-center">
-            <LayoutDashboard className="text-amber-100 h-4 w-4 inline sm:hidden" />
-            <h3 className="text-sm text-amber-100 sm:block hidden">
+            <LayoutDashboard className="text-white h-4 w-4 inline sm:hidden" />
+            <h3 className="text-sm text-white sm:block hidden">
               Dashboard
             </h3>
           </div>
           <div className="flex items-center">
-            <HelpCircle className="text-amber-100 h-4 w-4 inline sm:hidden" />
-            <h3 className="text-sm text-amber-100 sm:block hidden">FAQ</h3>
+            <HelpCircle className="text-white h-4 w-4 inline sm:hidden" />
+            <h3 className="text-sm text-white sm:block hidden">FAQ</h3>
           </div>
         </div>
       )}
@@ -100,11 +100,11 @@ const Header = () => {
       {isLoading ? (
         <Loader2 className="h-4 w-4 animate-spin text-gray-900" />
       ) : (
-        <div>
+        <div className="flex items-center">
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <User2Icon className="w-5 h-5 text-amber-50" />
+                <User2Icon className="w-8 h-8 text-amber-50 bg-gray-800 rounded-full p-2" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-20">
                 <DropdownMenuItem>
