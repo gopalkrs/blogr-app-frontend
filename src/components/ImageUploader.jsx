@@ -25,7 +25,7 @@ const ImageUploader = ({setValue}) => {
     if(res){
       setImageUrl(res?.data?.imageUrl);
       setValue("imageUrl", res?.data?.imageUrl);
-    //   console.log(res);
+    console.log(res);
     }
   }
 

@@ -51,7 +51,7 @@ const Header = () => {
   }
 
   return (
-    <div className="flex flex-row justify-between gap-1 items-center p-4 bg-orange-400 shadow-md">
+    <div className="flex flex-row justify-between gap-1 items-center p-4 bg-[#003049] shadow-md">
       <Link to={"/"} className="flex flex-row items-center">
         <Lightbulb className="h-4 w-4 text-white" />
         <h1 className="text-md md:text-lg font-medium text-amber-50">bloggr</h1>
@@ -117,10 +117,10 @@ const Header = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Button onClick={logoutUserHandler} variant={"secondary"} className="bg-transparent font-light flex items-center gap-1">
+                  <button onClick={logoutUserHandler} variant={"secondary"} className="bg-transparent font-light flex items-center gap-1">
                     <LogOut className="h-4 w-4" />
                     Signout
-                  </Button>
+                  </button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -1,15 +1,22 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
-import { MoveLeft, MoveRight, PenToolIcon, RocketIcon, UsersIcon } from "lucide-react";
+import {
+  MoveLeft,
+  MoveRight,
+  PenToolIcon,
+  RocketIcon,
+  UsersIcon,
+} from "lucide-react";
 //import motion from "motion";
 import * as motion from "motion/react-client";
 import { useGetAllPostStore } from "../store/useGetAllPostStore";
 import RecentPostSlider from "../components/RecentPostSlider";
 import { AnimatePresence } from "framer-motion";
 import TestimonialSection from "../components/TestimonialSection";
+import BlogCardRecent from "../components/home/blog-card-recent";
 
 const HomePage = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
@@ -40,21 +47,19 @@ const HomePage = () => {
   }, [index]);
 
   return (
-    <div>
-      <section className="flex flex-col sm:flex-row-reverse items-center sm:gap-10 gap-2 justify-center h-screen px-6 md:px-16 py-20 bg-gray-50">
-        <div>
-          <img
-            className="w-full h-auto"
-            src="/brainstorming.svg"
-            alt="Blog Image"
-          />
-        </div>
-        <div className="flex flex-col items-center justify-center max-w-lg text-center md:text-left">
-          <h1 className="sm:text-3xl text-2xl font-bold text-center">
+    <section>
+      <div className="relative w-full h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px] overflow-hidden">
+        <img
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+          src="https://gopalkrsbucket.s3.eu-north-1.amazonaws.com/044656e0-7971-47de-80b2-b94d47beb212-walling-UP7JSnodG2M-unsplash.jpg"
+          alt="Blog Image"
+        />
+        <div className="relative top-20 sm:top-40 md:top-60 left-0 z-10 max-w-xl px-6 text-center md:text-left text-gray-900">
+          <h1 className="text-2xl sm:text-3xl font-bold">
             Start your blogging journey <br />
-            <span className="text-blue-200">in minutes</span>
+            <span className="text-orange-500">in minutes</span>
           </h1>
-          <p className="mt-4 text-gray-400 text-sm">
+          <p className="mt-4 text-sm sm:text-base font-medium text-gray-600">
             Bloggr empowers creators to share stories, insights, and ideas with
             a global audience.
           </p>
@@ -63,66 +68,33 @@ const HomePage = () => {
               asChild
               className="text-white bg-gray-800 hover:bg-gray-600"
             >
-              <Link to={"/create"}>Get Started</Link>
+              <Link href="/create">Get Started</Link>
             </Button>
-            <Button variant="outline" asChild>
-              <Link to={"/dashboard"}>Explore Blogs</Link>
+            <Button
+              variant="outline"
+              asChild
+              className="border-white bg-orange-400 text-white hover:bg-orange-500"
+            >
+              <Link href="/dashboard">Explore Blogs</Link>
             </Button>
           </div>
         </div>
-      </section>
-      <section className="bg-white py-12 px-6 md:px-16">
-        <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">
-          Why Bloggr?
+      </div>
+
+      <section className="py-12 px-6 md:px-16">
+        <h2 className="text-center text-xl font-bold my-10">
+          Just Dropped: New Reads
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-center bg-gray-800 text-white p-6 rounded-lg shadow-md"
-          >
-            <PenToolIcon className="mx-auto mb-2 text-red-500 h-6 w-6" />
-            <h3 className="font-semibold">Easy to Use</h3>
-            <p className="text-sm text-gray-100">
-              A clean editor that lets you focus on writing.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-center  bg-gray-800 text-white p-6 rounded-lg shadow-md"
-          >
-            <RocketIcon className="mx-auto mb-2 text-amber-500 h-6 w-6" />
-            <h3 className="font-semibold">Instant Publishing</h3>
-            <p className="text-sm text-gray-100">
-              Your stories go live with just one click.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-center  bg-gray-800 text-white p-6 rounded-lg shadow-md"
-          >
-            <UsersIcon className="mx-auto mb-2 text-green-500 h-6 w-6" />
-            <h3 className="font-semibold">Grow Your Audience</h3>
-            <p className="text-sm text-gray-100">
-              Share and connect with fellow bloggers.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-      <section className="bg-cyan-100 py-12 px-6 md:px-16">
-        <h2 className="text-center text-xl font-bold">Just Dropped: New Reads</h2>
-        <div className="w-full max-w-xl mx-auto relative p-4">
+        <div className="sm:hidden w-full max-w-xl mx-auto relative p-4">
           <div className="relative h-64 overflow-hidden">
             <AnimatePresence mode="wait">
-              {posts?.slice(-4).map((post, ind) => 
-              ind === index? (
-                <RecentPostSlider key={index} index={index} post={post} />
-              ) : null )}
+              {posts
+                ?.slice(-4)
+                .map((post, ind) =>
+                  ind === index ? (
+                    <RecentPostSlider key={index} index={index} post={post} />
+                  ) : null
+                )}
             </AnimatePresence>
           </div>
 
@@ -132,11 +104,16 @@ const HomePage = () => {
             <button className="text-lg px-4 py-2" onClick={goToNext}><MoveRight /></button>
           </div> */}
         </div>
+        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {posts?.slice(-4).map((post, ind) => (
+            <BlogCardRecent key={ind} post={post} />
+          ))}
+        </div>
       </section>
       <section className="">
         <TestimonialSection />
       </section>
-    </div>
+    </section>
   );
 };
 
