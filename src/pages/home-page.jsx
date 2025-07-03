@@ -15,8 +15,9 @@ import * as motion from "motion/react-client";
 import { useGetAllPostStore } from "../store/useGetAllPostStore";
 import RecentPostSlider from "../components/RecentPostSlider";
 import { AnimatePresence } from "framer-motion";
-import TestimonialSection from "../components/TestimonialSection";
+import TestimonialSection from "../components/home/TestimonialSection";
 import BlogCardRecent from "../components/home/blog-card-recent";
+import BrowseByCategories from "../components/home/browse-by-categories";
 
 const HomePage = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
@@ -51,7 +52,7 @@ const HomePage = () => {
       <div className="relative w-full h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px] overflow-hidden">
         <img
           className="absolute inset-0 w-full h-full object-cover opacity-50"
-          src="https://gopalkrsbucket.s3.eu-north-1.amazonaws.com/044656e0-7971-47de-80b2-b94d47beb212-walling-UP7JSnodG2M-unsplash.jpg"
+          src="https://gopalkrsbucket.s3.amazonaws.com/68ce5f2c-113c-47f4-9b5d-d4dfe8a1d14d-daryadarya-livejournal-RHURc_FsTIY-unsplash.jpg"
           alt="Blog Image"
         />
         <div className="relative top-20 sm:top-40 md:top-60 left-0 z-10 max-w-xl px-6 text-center md:text-left text-gray-900">
@@ -109,6 +110,9 @@ const HomePage = () => {
             <BlogCardRecent key={ind} post={post} />
           ))}
         </div>
+      </section>
+      <section>
+        <BrowseByCategories />
       </section>
       <section className="">
         <TestimonialSection />

@@ -34,9 +34,10 @@ const TestimonialSection = () => {
         <h2 className="text-xl font-bold mb-10">What Our Users Are Saying</h2>
         <div className="grid gap-8 sm:grid-cols-2 ">
           {testimonials.map((t, index) => (
+            
             <div
               key={index}
-              className="bg-gray-50 p-6 rounded-2xl shadow-md hover:shadow-lg transition"
+              className="p-6 border border-red-200 transition"
             >
               <div className="flex items-center gap-4 mb-4">
                 <img
