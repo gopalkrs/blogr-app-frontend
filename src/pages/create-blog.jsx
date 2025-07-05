@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import {
   Select,
   SelectContent,
@@ -14,14 +7,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useUserStore } from "../store/userStore";
 import { usePostStore } from "../store/postsStore";
 import { useGetUserStore } from "../store/useGetUserStore";
 import TiptapEditor from "../components/TiptapEditor";
@@ -29,7 +19,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { blogSchema } from "../validations/blogSchema";
 import { toast, Toaster } from "sonner";
 import { motion } from "framer-motion";
-import axios from "axios";
 import ImageUploader from "../components/ImageUploader";
 
 const CreateBlog = () => {
@@ -56,28 +45,34 @@ const CreateBlog = () => {
   });
 
   const { createNewPost } = usePostStore();
-  const { user, fetchIfUserLogged, isLoading } = useGetUserStore();
+  const { user, fetchIfUserLogged } = useGetUserStore();
   useEffect(() => {
     fetchIfUserLogged();
   }, []);
 
   const onSubmitHandler = async (data) => {
-    const response = await createNewPost(data);
-    console.log(response);
+    console.log(data)
+    try {
+      const response = await createNewPost(data);
+      console.log(response);
 
-    if (response?.success) {
-      toast.success("Post created successfully");
-      reset();
-      setValue("content", "");
-      setContent("");
+      if (response?.success) {
+        toast.success("Post created successfully");
+        reset();
+        setValue("content", "");
+        setContent("");
 
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 300);
-    } else {
-      toast.error("Error creating post");
-      setValue("content", "");
-      setContent("");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 300);
+      } else {
+        toast.error("Error creating post");
+        setValue("content", "");
+        setContent("");
+      }
+    } catch (err) {
+      console.error("Error: ", err);
+      toast.error("Something went wrong");
     }
     reset();
   };
@@ -93,7 +88,7 @@ const CreateBlog = () => {
       <div className="space-y-10">
         <h2 className="text-center text-xl font-bold">Create New Blog</h2>
         <div className="flex flex-col gap-2">
-        <ImageUploader setValue={setValue} />
+          <ImageUploader setValue={setValue} />
           <form
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(onSubmitHandler)}
@@ -105,7 +100,7 @@ const CreateBlog = () => {
               >
                 Title
               </label> */}
-              
+
               <Input placeholder="Title" {...register("title")} />
               {errors.title && (
                 <p className="text-red-500 text-xs">{errors.title.message}</p>
@@ -127,7 +122,7 @@ const CreateBlog = () => {
             <Button
               disabled={false}
               type="submit"
-              className="my-6 bg-orange-500 hover:bg-gray-600"
+              className="my-6 bg-blue-500 hover:bg-blue-600"
             >
               Post
             </Button>
