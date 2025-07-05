@@ -20,7 +20,12 @@ const ImageUploader = ({setValue}) => {
     const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/posts/upload`,
         formdata,
-        { withCredentials: true }
+        { 
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data", // ✅ CRUCIAL
+          },
+         }
     );
     if(res){
       setImageUrl(res?.data?.imageUrl);
