@@ -36,7 +36,7 @@ const CreateBlog = () => {
     watch,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(blogSchema),
+    //resolver: zodResolver(blogSchema),
     defaultValues: {
       title: "",
       content: "",
