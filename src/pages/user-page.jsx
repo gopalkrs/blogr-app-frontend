@@ -7,7 +7,7 @@ import { Button } from "../components/ui/button";
 import UserProfile from "../components/UserProfile";
 import { useUserStore } from "../store/userStore";
 import { useGetUserStore } from "../store/useGetUserStore";
-import BlogPost from "../components/BlogPost";
+import BlogCardRecent from "../components/home/blog-card";
 
 const UserPage = () => {
   const colorArray = ["#ffbd00", "#c9ada7", "#ff5400", "#f2e9e4", "#ff0054"];
@@ -69,7 +69,7 @@ const UserPage = () => {
       <UserProfile user={user} />
       <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 md:grid-cols-2 sm:gap-8">
         {posts && posts?.map((post, index) => (
-          <BlogPost post={post} key={index} user={user} />
+          <BlogCardRecent post={post} key={index} user={user} />
         ))}
       </div>
       <div className="flex flex-col items-center justify-between p-4 space-y-3 sm:space-y-5 mt-10">

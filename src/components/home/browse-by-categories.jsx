@@ -25,7 +25,7 @@ const BrowseByCategories = () => {
     <div className="py-10 px-10 space-y-5">
       <div className="flex flex-row justify-between">
         <h1 className="font-medium text-md sm:text-xl">Browse by categories</h1>
-        <Link className="border border-gray-200 text-blue-400 bg-gray-100 shadow-md rounded text-xs p-1 flex flex-row items-center gap-1">Browse More<ArrowUpRight className="h-4 w-4" /></Link>
+        <Link to={`/categories`} className="border border-gray-200 text-blue-400 bg-gray-100 shadow-md rounded text-xs p-1 flex flex-row items-center gap-1">Browse More<ArrowUpRight className="h-4 w-4" /></Link>
       </div>
       <div className="grid items-center gap-2 grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {categoriesType.map((category, index) => (

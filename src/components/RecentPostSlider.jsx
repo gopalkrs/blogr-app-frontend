@@ -14,6 +14,7 @@ import { format } from "date-fns";
 import truncate from "html-truncate";
 import * as motion from "motion/react-client";
 import { formatDistanceToNow } from 'date-fns';
+import BlogCard from "./home/blog-card";
 
 
 const RecentPostSlider = ({ post }) => {
@@ -23,13 +24,14 @@ const RecentPostSlider = ({ post }) => {
 
   return (
           <motion.div
-            className="absolute flex h-full md:h-8/12 w-full flex-col rounded-md shadow-md bg-slate-50 p-4"
+            className="flex justify-center py-2 items-center bg-slate-50"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
           >
-              <h2 className="text-center font-semibold sm:text-md pb-2 text-sm">
+            <BlogCard post={post} />
+               {/* <h2 className="text-center font-semibold sm:text-md pb-2 text-sm">
                 {post.title}
               </h2>
             
@@ -38,11 +40,6 @@ const RecentPostSlider = ({ post }) => {
                   className="prose"
                   dangerouslySetInnerHTML={{ __html: sanitized }}
                 />
-                {/* {post.content.length > 100 && (
-                  <span className="text-blue-500">
-                    <Link to={`/posts/${post._id}`}>Read more</Link>
-                  </span>
-                )} */}
               </div>
             <div className="absolute bottom-1 flex flex-col flex-start mt-4">
               
@@ -62,7 +59,7 @@ const RecentPostSlider = ({ post }) => {
               <p className="text-gray-500 text-xs font-light">
                 {formatDistanceToNow(new Date(post?.date), { addSuffix: true })}
               </p>
-              </div>
+              </div>  */}
           </motion.div>
   );
 };

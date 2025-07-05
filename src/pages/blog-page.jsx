@@ -40,7 +40,7 @@ const BlogPage = () => {
         </Link>
       </Button>
       <div className="mx-auto max-w-[80%] md:max-w-2xl sm:max-w-xl bg-white py-12 px-6 ">
-        <img src={posts.imageUrl || `https://gopalkrsbucket.s3.eu-north-1.amazonaws.com/8cc2ecdf-9cc2-454c-9442-244fa1068b28-arnel-hasanovic-MNd-Rka1o0Q-unsplash.jpg`} />
+        <img src={posts.imageUrl || `https://gopalkrsbucket.s3.eu-north-1.amazonaws.com/f8a413fc-d089-4e28-9651-ad7f1f94795b-christin-hume-k2Kcwkandwg-unsplash.jpg`} />
         <h1 className="py-5 font-bold text-md text-center sm:text-2xl leading-tight">
           {posts.title}
         </h1>

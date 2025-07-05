@@ -16,8 +16,8 @@ import { useGetAllPostStore } from "../store/useGetAllPostStore";
 import RecentPostSlider from "../components/RecentPostSlider";
 import { AnimatePresence } from "framer-motion";
 import TestimonialSection from "../components/home/TestimonialSection";
-import BlogCardRecent from "../components/home/blog-card-recent";
 import BrowseByCategories from "../components/home/browse-by-categories";
+import BlogCard from "../components/home/blog-card";
 
 const HomePage = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
@@ -87,7 +87,7 @@ const HomePage = () => {
           Just Dropped: New Reads
         </h2>
         <div className="sm:hidden w-full max-w-xl mx-auto relative p-4">
-          <div className="relative h-64 overflow-hidden">
+          <div className="relative overflow-hidden">
             <AnimatePresence mode="wait">
               {posts
                 ?.slice(-4)
@@ -105,9 +105,9 @@ const HomePage = () => {
             <button className="text-lg px-4 py-2" onClick={goToNext}><MoveRight /></button>
           </div> */}
         </div>
-        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {posts?.slice(-4).map((post, ind) => (
-            <BlogCardRecent key={ind} post={post} />
+            <BlogCard key={ind} post={post} />
           ))}
         </div>
       </section>

@@ -12,9 +12,10 @@ import { Button } from "../components/ui/button";
 import { Loader, Plus, User, UserCircle, UserCircle2Icon } from "lucide-react";
 import { useGetAllPostStore } from "../store/useGetAllPostStore";
 import { Link } from "react-router-dom";
-import BlogPost from "../components/BlogPost";
 import { useGetUserStore } from "../store/useGetUserStore";
 import { motion } from "framer-motion";
+import RecentPostSlider from "../components/RecentPostSlider";
+import BlogCard from "../components/home/blog-card";
 
 const BlogsDashboard = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
@@ -54,7 +55,7 @@ const BlogsDashboard = () => {
     >
       <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 sm:gap-8">
         {posts?.map((post, index) => (
-          <BlogPost post={post} user={user} key={index} />
+          <BlogCard post={post} user={user} key={index} />
         ))}
       </div>
       {user.role === "admin" ? (
