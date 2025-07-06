@@ -41,6 +41,7 @@ const CreateBlog = () => {
       title: "",
       content: "",
       imageUrl: "",
+      category: ""
     },
   });
 
@@ -51,7 +52,7 @@ const CreateBlog = () => {
   }, []);
 
   const onSubmitHandler = async (data) => {
-    console.log(data)
+    console.log(data);
     try {
       const response = await createNewPost(data);
       console.log(response);
@@ -86,7 +87,7 @@ const CreateBlog = () => {
       className="flex flex-col items-center justify-center min-h-screen p-4"
     >
       <div className="space-y-10">
-        <h2 className="text-center text-xl font-bold">Create New Blog</h2>
+        {/* <h2 className="text-center text-xl font-bold">Create New Blog</h2> */}
         <div className="flex flex-col gap-2">
           <ImageUploader setValue={setValue} />
           <form
@@ -101,12 +102,30 @@ const CreateBlog = () => {
                 Title
               </label> */}
 
-              <Input placeholder="Title" {...register("title")} />
+              <input className="p-1 bg-gray-50 outline-none w-full" placeholder="Title" {...register("title")} />
               {errors.title && (
                 <p className="text-red-500 text-xs">{errors.title.message}</p>
               )}
             </div>
-
+            <Select onValueChange={(value) => setValue("category", value)}>
+              <SelectTrigger className="w-[200px] bg-gray-50">
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="technology">Technology</SelectItem>
+                <SelectItem value="education">Education</SelectItem>
+                <SelectItem value="travel">Travel</SelectItem>
+                <SelectItem value="health">Health</SelectItem>
+                <SelectItem value="finance">Finance</SelectItem>
+                <SelectItem value="lifestyle">Lifestyle</SelectItem>
+                <SelectItem value="food">Food</SelectItem>
+                <SelectItem value="news">National News</SelectItem>
+                <SelectItem value="international">International Affairs</SelectItem>
+                <SelectItem value="sports">Sports</SelectItem>
+                <SelectItem value="entertainment">Entertainment</SelectItem>
+                <SelectItem value="others">Others</SelectItem>
+              </SelectContent>
+            </Select>
             <div className="flex flex-col gap-2 text-muted-foreground">
               {/* <label
                 className="font-bold text-xs text-gray-300"
@@ -122,7 +141,7 @@ const CreateBlog = () => {
             <Button
               disabled={false}
               type="submit"
-              className="my-6 bg-blue-500 hover:bg-blue-600"
+              className="my-6 bg-blue-300 bg-blue-300 text-gray-50 p-1 rounded shadow-xl hover:bg-blue-400"
             >
               Post
             </Button>

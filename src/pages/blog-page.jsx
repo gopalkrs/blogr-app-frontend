@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { usePostStore } from "../store/postsStore";
-import { Loader, MoveLeft } from "lucide-react";
+import { ArrowLeft, Loader, MoveLeft, Tags } from "lucide-react";
 import { format } from "date-fns";
 import { Button } from "../components/ui/button";
 import DOMPurify from "dompurify";
@@ -28,42 +28,41 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen my-10">
-      <Button
-        variant={"ghost"}
-        className="text-blue-500 bg-transparent my-10 mx-5 hover:none"
+      <button 
+        className="bg-blue-300 text-xs text-gray-50 p-1 rounded shadow-xl my-5 mx-5 hover:none"
       >
         <Link
           to={`/dashboard`} /*/users/${user?.id}*/
-          className="flex flex-row items-center gap-1"
+          className="flex flex-row items-center"
         >
-          <MoveLeft /> Dashboard
+          <ArrowLeft className="h-4 w-4" /> Dashboard
         </Link>
-      </Button>
-      <div className="mx-auto max-w-[80%] md:max-w-2xl sm:max-w-xl bg-white py-12 px-6 ">
-        <img src={posts.imageUrl || `https://gopalkrsbucket.s3.eu-north-1.amazonaws.com/f8a413fc-d089-4e28-9651-ad7f1f94795b-christin-hume-k2Kcwkandwg-unsplash.jpg`} />
-        <h1 className="py-5 font-bold text-md text-center sm:text-2xl leading-tight">
+      </button>
+      <div className="mx-auto max-w-[80%] md:max-w-2xl lg:max-w-3xl sm:max-w-xl bg-white py-5 px-6 ">
+        <h1 className="py-1 font-bold text-md text-left sm:text-2xl leading-tight">
           {posts.title}
         </h1>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col py-5">
           {posts?.user && (
-            <div className="flex flex-col items-center gap-1">
-              <p className="text-gray-400 text-sm font-light">
+            <div className="">
+              <p className="text-gray-500 text-xs font-medium">
                 {posts?.user[0].name}
               </p>
-              {posts?.user && posts?.user[0].role === "admin" ? (
-                <span className="bg-gray-300 text-white rounded-full flex items-center justify-center text-center text-xs px-2">
-                  {posts?.user[0].role}
-                </span>
-              ) : (
-                <span className="bg-amber-300 text-white rounded-full flex items-center justify-center text-center text-xs px-2">
-                  {posts?.user[0].role}
-                </span>
-              )}
             </div>
           )}
           <p className="text-gray-400 text-xs font-light">
             {posts?.date && format(new Date(posts.date), "PPp")}
           </p>
+          <p><Tags/>{posts?.category || ""}</p>
+        </div>
+        <div className="relative">
+        <img
+        className="h-full w-full object-cover"
+          src={
+            posts.imageUrl ||
+            `https://gopalkrsbucket.s3.eu-north-1.amazonaws.com/f8a413fc-d089-4e28-9651-ad7f1f94795b-christin-hume-k2Kcwkandwg-unsplash.jpg`
+          }
+        />
         </div>
 
         <article className=" text-gray-800">

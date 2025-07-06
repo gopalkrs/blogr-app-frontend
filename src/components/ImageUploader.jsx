@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { toast } from 'sonner';
 
 const ImageUploader = ({setValue}) => {
     
@@ -30,14 +31,15 @@ const ImageUploader = ({setValue}) => {
     if(res){
       setImageUrl(res?.data?.imageUrl);
       setValue("imageUrl", res?.data?.imageUrl);
-    console.log(res);
+      toast.success("Image uploaded successfully")
+    //console.log(res);
     }
   }
 
   return (
     <div className='flex flex-row gap-2'>
-        <input type="file" onChange={handleFileChange} className="border border-gray-200 text-xs bg-red-100 rounded-md p-1" />
-        <button onClick={handleImageUpload} className='bg-blue-500 text-white text-sm px-2 py-1 rounded-md'>Upload</button>
+        <input type="file" required={true} className="bg-gray-50" onChange={handleFileChange} className="border border-gray-200 text-xs bg-red-100 rounded-md p-1" />
+        <button onClick={handleImageUpload} className='bg-blue-300 text-white text-sm px-2 py-1 shadow-md rounded-md'>Upload</button>
     </div>
   )
 }
