@@ -69,14 +69,14 @@ const HomePage = () => {
               asChild
               className="text-white bg-gray-800 hover:bg-gray-600"
             >
-              <Link href="/create">Get Started</Link>
+              <Link to="/create">Get Started</Link>
             </Button>
             <Button
               variant="outline"
               asChild
               className="border-white bg-orange-400 text-white hover:bg-orange-500"
             >
-              <Link href="/dashboard">Explore Blogs</Link>
+              <Link to="/dashboard">Explore Blogs</Link>
             </Button>
           </div>
         </div>

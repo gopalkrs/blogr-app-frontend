@@ -33,7 +33,7 @@ const BrowseByCategories = () => {
           <Link
             key={index}
             className="relative w-45 h-45 md:w-50 md:h-50 overflow-hidden rounded-md shadow-md cursor-pointer"
-            to={`/${category.type.toLowerCase()}`}
+            href={`/${category.type.toLowerCase()}`}
           >
             <img
               src={category.img}
