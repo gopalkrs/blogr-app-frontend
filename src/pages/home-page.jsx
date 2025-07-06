@@ -90,7 +90,7 @@ const HomePage = () => {
           <div className="relative overflow-hidden">
             <AnimatePresence mode="wait">
               {posts
-                ?.slice(-4)
+                ?.slice(0, 4)
                 .map((post, ind) =>
                   ind === index ? (
                     <RecentPostSlider key={index} index={index} post={post} />
@@ -106,7 +106,7 @@ const HomePage = () => {
           </div> */}
         </div>
         <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {posts?.slice(-4).map((post, ind) => (
+          {posts?.slice(0, 4).map((post, ind) => (
             <BlogCard key={ind} post={post} />
           ))}
         </div>

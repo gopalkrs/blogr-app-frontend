@@ -53,10 +53,12 @@ const BlogsDashboard = () => {
       transition={{ duration: 0.3 }}
       className="relative w-full max-w-4xl mx-auto px-4 space-y-4 m-10 min-h-screen"
     >
-      <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 sm:gap-8">
+      <div className="flex items-center justify-center">
+      <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 lg:grid-cols-4 sm:gap-8">
         {posts?.map((post, index) => (
           <BlogCard post={post} user={user} key={index} />
         ))}
+      </div>
       </div>
       {user.role === "admin" ? (
         <div className="sticky bottom-6 flex justify-end">

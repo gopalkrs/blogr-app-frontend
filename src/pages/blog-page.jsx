@@ -53,7 +53,9 @@ const BlogPage = () => {
           <p className="text-gray-400 text-xs font-light">
             {posts?.date && format(new Date(posts.date), "PPp")}
           </p>
-          <p><Tags/>{posts?.category || ""}</p>
+          {posts?.category &&
+            <p className="py-2 flex gap-1 flex-row items-center text-sm text-gray-800 font-medium"><Tags className="h-4 w-4 text-blue-500"/>{posts?.category.charAt(0).toUpperCase() + posts?.category.slice(1)}</p>
+          }
         </div>
         <div className="relative">
         <img

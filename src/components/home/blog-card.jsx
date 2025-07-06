@@ -28,8 +28,8 @@ const BlogCard = ({ post, user }) => {
     };
 
   return (
-    <Link to={`/posts/${post._id}`} className="flex flex-col items-center max-w-60">
-      <div className="relative h-50 w-60 rounded-xl overflow-hidden shadow-md">
+    <Link to={`/posts/${post._id}`} className="flex flex-col items-center sm:max-w-50 max-w-60">
+      <div className="relative h-50 w-60 sm:w-50 rounded-xl overflow-hidden shadow-md">
       {post.userId === user?.id && (
           <Delete
             onClick={() => deletePostHandler(post?._id)}
