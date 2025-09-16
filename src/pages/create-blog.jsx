@@ -64,7 +64,7 @@ const CreateBlog = () => {
         setContent("");
 
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/articles");
         }, 300);
       } else {
         toast.error("Error creating post");

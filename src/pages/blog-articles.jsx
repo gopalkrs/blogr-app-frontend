@@ -15,9 +15,9 @@ import { Link } from "react-router-dom";
 import { useGetUserStore } from "../store/useGetUserStore";
 import { motion } from "framer-motion";
 import RecentPostSlider from "../components/RecentPostSlider";
-import BlogCard from "../components/home/blog-card";
+import BlogCard from "../components/home/BlogCard";
 
-const BlogsDashboard = () => {
+const BlogArticles = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
   const { user, fetchIfUserLogged } = useGetUserStore();
 
@@ -79,4 +79,4 @@ const BlogsDashboard = () => {
   );
 };
 
-export default BlogsDashboard;
+export default BlogArticles;

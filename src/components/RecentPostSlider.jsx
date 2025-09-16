@@ -10,17 +10,11 @@ import {
 import DOMPurify from "dompurify";
 import { Delete, ShieldUser, User, UserLock, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
-import truncate from "html-truncate";
 import * as motion from "motion/react-client";
-import { formatDistanceToNow } from 'date-fns';
-import BlogCard from "./home/blog-card";
+import FeaturedPostCard from "./posts-card/FeaturedPostCard";
 
 
-const RecentPostSlider = ({ post }) => {
-  const preview = truncate(post?.content, 100);
-  const sanitized = DOMPurify.sanitize(preview);
- 
+const RecentPostSlider = ({ post }) => { 
 
   return (
           <motion.div
@@ -30,36 +24,7 @@ const RecentPostSlider = ({ post }) => {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
           >
-            <BlogCard post={post} />
-               {/* <h2 className="text-center font-semibold sm:text-md pb-2 text-sm">
-                {post.title}
-              </h2>
-            
-              <div className="text-sm sm:mt-10 mt-4 text-gray-400">
-                <div
-                  className="prose"
-                  dangerouslySetInnerHTML={{ __html: sanitized }}
-                />
-              </div>
-            <div className="absolute bottom-1 flex flex-col flex-start mt-4">
-              
-                <div className="flex flex-row items-center gap-1">
-                  <span>
-                  {post?.user[0].role === "admin" ? (
-                    <UserLock className="h-4 w-4 text-red-500" />
-                  ) : (
-                    <UserRound className="w-3 h-3 text-amber-500" />
-                  )}
-                  </span>
-                  <p className="text-gray-400 sm:text-sm text-xs font-light">
-                    {post?.user[0].name}
-                  </p>
-                </div>
-              
-              <p className="text-gray-500 text-xs font-light">
-                {formatDistanceToNow(new Date(post?.date), { addSuffix: true })}
-              </p>
-              </div>  */}
+            <FeaturedPostCard post={post} />
           </motion.div>
   );
 };

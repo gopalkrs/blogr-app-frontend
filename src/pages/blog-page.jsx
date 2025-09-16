@@ -32,7 +32,7 @@ const BlogPage = () => {
         className="bg-blue-300 text-xs text-gray-50 p-1 rounded shadow-xl my-5 mx-5 hover:none"
       >
         <Link
-          to={`/dashboard`} /*/users/${user?.id}*/
+          to={`/articles`} /*/users/${user?.id}*/
           className="flex flex-row items-center"
         >
           <ArrowLeft className="h-4 w-4" /> Dashboard

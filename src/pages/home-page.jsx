@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import {
+  ArrowRight,
   MoveLeft,
   MoveRight,
   PenToolIcon,
@@ -16,21 +17,25 @@ import { useGetAllPostStore } from "../store/useGetAllPostStore";
 import RecentPostSlider from "../components/RecentPostSlider";
 import { AnimatePresence } from "framer-motion";
 import TestimonialSection from "../components/home/TestimonialSection";
-import BrowseByCategories from "../components/home/browse-by-categories";
-import BlogCard from "../components/home/blog-card";
+import FeaturesGrid from "../components/home/FeaturesGrid";
+import BrowseByCategories from "../components/home/BrowseByCategories";
+import BlogCard from "../components/home/BlogCard";
+import FeaturedPosts from "../components/home/FeaturedPosts";
+import FeaturedPostCard from "../components/posts-card/FeaturedPostCard";
+import NewsLetter from "../components/home/NewsLetter";
 
 const HomePage = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
 
   const [index, setIndex] = useState(0);
 
-  const goToNext = () => {
-    setIndex((prevIndex) => (prevIndex + 1) % 4);
-  };
+  // const goToNext = () => {
+  //   setIndex((prevIndex) => (prevIndex + 1) % 4);
+  // };
 
-  const goToPrev = () => {
-    setIndex((prevIndex) => (prevIndex - 1 + 4) % 4);
-  };
+  // const goToPrev = () => {
+  //   setIndex((prevIndex) => (prevIndex - 1 + 4) % 4);
+  // };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,53 +44,50 @@ const HomePage = () => {
     fetchPosts();
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      goToNext();
-    }, 3000); // Change slide every 2 seconds
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     goToNext();
+  //   }, 3000); // Change slide every 2 seconds
 
-    return () => clearInterval(interval); // Cleanup the interval on component unmount so it doesn't keep running
-  }, [index]);
+  //   return () => clearInterval(interval); // Cleanup the interval on component unmount so it doesn't keep running
+  // }, [index]);
 
   return (
     <section>
-      <div className="relative w-full h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px] overflow-hidden">
-        <img
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
-          src="https://gopalkrsbucket.s3.amazonaws.com/68ce5f2c-113c-47f4-9b5d-d4dfe8a1d14d-daryadarya-livejournal-RHURc_FsTIY-unsplash.jpg"
-          alt="Blog Image"
-        />
-        <div className="relative top-20 sm:top-40 md:top-60 left-0 z-10 max-w-xl px-6 text-center md:text-left text-gray-900">
-          <h1 className="text-2xl sm:text-3xl font-bold">
-            Start your blogging journey <br />
-            <span className="text-orange-500">in minutes</span>
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Discover Amazing 
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600"> Stories</span>
           </h1>
-          <p className="mt-4 text-sm sm:text-base font-medium text-gray-600">
-            Bloggr empowers creators to share stories, insights, and ideas with
-            a global audience.
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Join thousands of readers exploring insightful articles, tutorials, and stories from passionate writers around the world.
           </p>
-          <div className="flex gap-4 mt-6 justify-center md:justify-start">
-            <Button
-              asChild
-              className="text-white bg-gray-800 hover:bg-gray-600"
-            >
-              <Link to="/create">Get Started</Link>
-            </Button>
-            <Button
-              variant="outline"
-              asChild
-              className="border-white bg-orange-400 text-white hover:bg-orange-500"
-            >
-              <Link to="/dashboard">Explore Blogs</Link>
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to={'/articles'} className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-4 rounded-full hover:from-orange-600 hover:to-amber-600 transition-all duration-300 transform hover:scale-105 font-medium shadow-xl flex items-center space-x-2">
+              <span>Start Reading</span>
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+            <Link to={'/create'} className="text-gray-700 border-2 border-gray-200 px-8 py-4 rounded-full hover:border-orange-300 hover:text-orange-600 transition-all duration-300 font-medium flex items-center space-x-2 bg-white/50 backdrop-blur-sm">
+              Create
+            </Link>
           </div>
         </div>
-      </div>
+      </section>
+
+      <FeaturesGrid />
+      <FeaturedPosts posts={posts?.splice(0, 3)} />
 
       <section className="py-12 px-6 md:px-16">
-        <h2 className="text-center text-xl font-bold my-10">
-          Just Dropped: New Reads
-        </h2>
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-4xl font-bold text-gray-800 mb-4">Latest Articles</h2>
+                <p className="text-xl text-gray-600">Fresh insights and stories published recently</p>
+              </div>
+              <Link to={'/articles'} className="hidden md:block bg-white/60 backdrop-blur-sm border-2 border-orange-200 text-orange-600 px-6 py-3 rounded-full hover:border-orange-300 hover:bg-white/80 transition-all duration-300 font-medium">
+                View All Posts
+              </Link>
+            </div>
         <div className="sm:hidden w-full max-w-xl mx-auto relative p-4">
           <div className="relative overflow-hidden">
             <AnimatePresence mode="wait">
@@ -105,18 +107,14 @@ const HomePage = () => {
             <button className="text-lg px-4 py-2" onClick={goToNext}><MoveRight /></button>
           </div> */}
         </div>
-        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {posts?.slice(0, 4).map((post, ind) => (
-            <BlogCard key={ind} post={post} />
+        <div className="hidden sm:grid lg:grid-cols-3 gap-8">
+          {posts?.slice(0, 3).map((post, ind) => (
+            <FeaturedPostCard key={ind} post={post} />
           ))}
         </div>
       </section>
-      <section>
-        <BrowseByCategories />
-      </section>
-      <section className="">
-        <TestimonialSection />
-      </section>
+      <BrowseByCategories />
+      <NewsLetter />
     </section>
   );
 };
