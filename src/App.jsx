@@ -13,7 +13,7 @@ import AuthRedirect from "./protected/AuthRedirect";
 import BlogPage from "./pages/blog-page";
 import { Toaster } from "sonner";
 import 'sonner';
-import BlogArticles from "./pages/blog-articles";
+import ArticlesListPage from "./pages/ArticlesListPage";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -29,7 +29,7 @@ function App() {
           <Route path="/login" element={<AuthRedirect><SignIn /></AuthRedirect>} />
           <Route path="/register" element={<AuthRedirect><SignUp /></AuthRedirect>} />
           <Route path="/users/:id" element={<ProtectedRoutes><UserPage /></ProtectedRoutes>} />
-          <Route path="/articles" element={<ProtectedRoutes><BlogArticles /></ProtectedRoutes>} />
+          <Route path="/articles" element={<ProtectedRoutes><ArticlesListPage /></ProtectedRoutes>} />
         </Routes>
         <Toaster richColors />
         <Footer />

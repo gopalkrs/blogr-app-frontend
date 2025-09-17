@@ -16,8 +16,9 @@ import { useGetUserStore } from "../store/useGetUserStore";
 import { motion } from "framer-motion";
 import RecentPostSlider from "../components/RecentPostSlider";
 import BlogCard from "../components/home/BlogCard";
+import ArticleListPageHeader from "../components/article-list/ArticleListPageHeader";
 
-const BlogArticles = () => {
+const ArticlesListPage = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
   const { user, fetchIfUserLogged } = useGetUserStore();
 
@@ -51,14 +52,16 @@ const BlogArticles = () => {
       exit={{ x: -500, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="relative w-full max-w-4xl mx-auto px-4 space-y-4 m-10 min-h-screen"
+      className="relative min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50"
     >
-      <div className="flex items-center justify-center">
-      <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 lg:grid-cols-4 sm:gap-8">
-        {posts?.map((post, index) => (
-          <BlogCard post={post} user={user} key={index} />
-        ))}
-      </div>
+      <ArticleListPageHeader />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 lg:grid-cols-4 sm:gap-8">
+          {posts?.map((post, index) => (
+            <BlogCard post={post} user={user} key={index} />
+          ))}
+        </div>
       </div>
       {user.role === "admin" ? (
         <div className="sticky bottom-6 flex justify-end">
@@ -70,7 +73,6 @@ const BlogArticles = () => {
               Create New <Plus className="h-3 w-3" />
             </Link>
           </Button>
-        
         </div>
       ) : (
         <></>
@@ -79,4 +81,4 @@ const BlogArticles = () => {
   );
 };
 
-export default BlogArticles;
+export default ArticlesListPage;

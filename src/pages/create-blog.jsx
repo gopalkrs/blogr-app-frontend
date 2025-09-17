@@ -23,6 +23,20 @@ import ImageUploader from "../components/ImageUploader";
 
 const CreateBlog = () => {
   const navigate = useNavigate();
+
+  const categories = [
+    "Technology",
+    "Lifestyle",
+    "Business",
+    "Health",
+    "Travel",
+    "Food",
+    "Design",
+    "Finance",
+    "Career",
+    "Environment",
+    "Others"
+  ];
   const [content, setContent] = useState("");
   const onChangeHandler = (html) => {
     setContent(html);
@@ -41,7 +55,7 @@ const CreateBlog = () => {
       title: "",
       content: "",
       imageUrl: "",
-      category: ""
+      category: "",
     },
   });
 
@@ -84,7 +98,7 @@ const CreateBlog = () => {
       exit={{ x: 500, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="flex flex-col items-center justify-center min-h-screen p-4"
+      className="flex flex-col max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen"
     >
       <div className="space-y-10">
         {/* <h2 className="text-center text-xl font-bold">Create New Blog</h2> */}
@@ -94,20 +108,44 @@ const CreateBlog = () => {
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(onSubmitHandler)}
           >
-            <div className="flex flex-col gap-2 items-start text-muted-foreground">
-              {/* <label
-                className="font-bold text-xs text-gray-300"
-                htmlFor="title"
-              >
-                Title
-              </label> */}
-
-              <input className="p-1 bg-gray-50 outline-none w-full" placeholder="Title" {...register("title")} />
-              {errors.title && (
-                <p className="text-red-500 text-xs">{errors.title.message}</p>
-              )}
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-orange-100">
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Blog Title *
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent bg-white/80 text-lg"
+                    placeholder="Title"
+                    {...register("title")}
+                  />
+                  {errors.title && (
+                    <p className="text-red-500 text-xs">
+                      {errors.title.message}
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
-            <Select onValueChange={(value) => setValue("category", value)}>
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-orange-100">
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Category *
+                  </label>
+                  <select
+                    onChange={(e) => setValue("category", e.target.value)}
+                    className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent bg-white/80"
+                  >
+                    <option value="">Select a category</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                  {/* <Select className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent bg-white/80" onValueChange={(value) => setValue("category", value)}>
               <SelectTrigger className="w-[200px] bg-gray-50">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
@@ -120,12 +158,23 @@ const CreateBlog = () => {
                 <SelectItem value="lifestyle">Lifestyle</SelectItem>
                 <SelectItem value="food">Food</SelectItem>
                 <SelectItem value="news">National News</SelectItem>
-                <SelectItem value="international">International Affairs</SelectItem>
+                <SelectItem value="international">
+                  International Affairs
+                </SelectItem>
                 <SelectItem value="sports">Sports</SelectItem>
                 <SelectItem value="entertainment">Entertainment</SelectItem>
                 <SelectItem value="others">Others</SelectItem>
               </SelectContent>
-            </Select>
+            </Select> */}
+                  {errors.title && (
+                    <p className="text-red-500 text-xs">
+                      {errors.title.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
             <div className="flex flex-col gap-2 text-muted-foreground">
               {/* <label
                 className="font-bold text-xs text-gray-300"
@@ -133,18 +182,26 @@ const CreateBlog = () => {
               >
                 Content
               </label> */}
-              <TiptapEditor content={content} onChange={onChangeHandler} />
-              {errors.content && (
-                <p className="text-red-500 text-xs">{errors.content.message}</p>
-              )}
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-orange-100">
+                <div className="p-4 border-b border-orange-100">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Content *
+                  </label>
+                  <TiptapEditor content={content} onChange={onChangeHandler} />
+                  {errors.content && (
+                    <p className="text-red-500 text-xs">
+                      {errors.content.message}
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
-            <Button
-              disabled={false}
-              type="submit"
-              className="my-6 bg-blue-300 bg-blue-300 text-gray-50 p-1 rounded shadow-xl hover:bg-blue-400"
-            >
-              Post
-            </Button>
+            <button
+                type="submit"
+                className="space-x-2 px-6 py-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all duration-300"
+              >
+                Publish
+              </button>
           </form>
         </div>
       </div>

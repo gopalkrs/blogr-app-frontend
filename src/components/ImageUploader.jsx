@@ -38,8 +38,8 @@ const ImageUploader = ({setValue}) => {
 
   return (
     <div className='flex flex-row gap-2'>
-        <input type="file" required={true} className="bg-gray-50" onChange={handleFileChange} className="border border-gray-200 text-xs bg-red-100 rounded-md p-1" />
-        <button onClick={handleImageUpload} className='bg-blue-300 text-white text-sm px-2 py-1 shadow-md rounded-md'>Upload</button>
+        <input type="file" required={true} onChange={handleFileChange} className="border border-gray-200 text-xs bg-red-100 rounded-md p-1" />
+        <button onClick={handleImageUpload} className='bg-gradient-to-r from-orange-500 to-amber-500 text-white text-sm px-2 py-1 shadow-md rounded-md'>Upload</button>
     </div>
   )
 }
