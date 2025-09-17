@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 import RecentPostSlider from "../components/RecentPostSlider";
 import BlogCard from "../components/home/BlogCard";
 import ArticleListPageHeader from "../components/article-list/ArticleListPageHeader";
+import ArticleComponent from "../components/article-list/ArticleComponent";
 
 const ArticlesListPage = () => {
   const { posts, getAllPostsCreated, isLoading } = useGetAllPostStore();
@@ -57,11 +58,7 @@ const ArticlesListPage = () => {
       <ArticleListPageHeader />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-3 lg:grid-cols-4 sm:gap-8">
-          {posts?.map((post, index) => (
-            <BlogCard post={post} user={user} key={index} />
-          ))}
-        </div>
+        <ArticleComponent posts={posts} />
       </div>
       {user.role === "admin" ? (
         <div className="sticky bottom-6 flex justify-end">
