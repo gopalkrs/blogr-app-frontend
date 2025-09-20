@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import React from "react";
-import FeaturedPostCard from "../posts-card/FeaturedPostCard";
+import PostCard from "../posts-card/PostCard";
 
 const FeaturedPosts = ({ posts }) => {
   return (
@@ -19,7 +19,7 @@ const FeaturedPosts = ({ posts }) => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Large Featured Post */}
           {posts?.map((post, idx) => (
-            <FeaturedPostCard key={idx} post={post} ind={idx} />
+            <PostCard key={idx} post={post} />
           ))}
         </div>
       </div>

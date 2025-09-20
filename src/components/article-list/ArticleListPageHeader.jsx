@@ -8,14 +8,14 @@ const ArticleListPageHeader = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [sortBy, setSortBy] = useState('latest');
 
-     const categories = [
+  const categories = [
     "Technology",
     "Lifestyle",
     "Business",
     "Health",
     "Travel",
     "Food",
-    "Design",
+    "Sports",
     "Finance",
     "Career",
     "Environment",

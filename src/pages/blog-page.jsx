@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { usePostStore } from "../store/postsStore";
 import {
   ArrowLeft,
@@ -16,17 +16,41 @@ import { Button } from "../components/ui/button";
 import DOMPurify from "dompurify";
 import { useGetUserStore } from "../store/useGetUserStore";
 import ArticleEndSection from "../components/article-page/ArticleEndSection";
+import { useGetBlogAuthorStore } from "../store/useGetBlogAuthorStore";
 
 const BlogPage = () => {
   const { id } = useParams();
+  
+   const {pathname} = useLocation();
 
   const { isLoading, posts, getPostWithId } = usePostStore();
+  const { clearAuthorData, authorData, getAuthorWithId} = useGetBlogAuthorStore();
+
+  const [author, setAuthor] = useState(null);
 
   const { user, fetchIfUserLogged } = useGetUserStore();
   useEffect(() => {
     fetchIfUserLogged();
     getPostWithId(id);
   }, []);
+
+  useEffect(() => {
+    if(posts && posts.authorId){
+      getAuthorWithId(posts.authorId);
+    }
+  }, [posts]);
+
+  useEffect(() => {
+    if(authorData){
+      setAuthor(authorData);
+    }
+  }, [authorData]);
+
+  //clearing author data on path change
+
+  useEffect(() => {
+    clearAuthorData();
+  }, [pathname]);
 
   if (isLoading && !posts) {
     return (
@@ -96,21 +120,23 @@ const BlogPage = () => {
             {posts.title}
           </h1>
           {/*Author Info*/}
+          {authorData && (
           <div className="flex items-center space-x-4 p-4 bg-orange-50/50 rounded-xl mb-8">
             <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">{"R"}</span>
+              <span className="text-white font-bold">{author?.name.charAt(0)}</span>
             </div>
             <div className="flex-1">
               <h3 className="font-semibold text-gray-800">
-                {/* {posts?.user[0]?.name} */}
+                {author?.name}
               </h3>
-              <p className="text-sm text-gray-600">bio...</p>
-              <p className="text-xs text-gray-500">0 followers</p>
+              <p className="text-sm text-gray-600">{author?.bio || "bio.."}</p>
+              <p className="text-xs text-gray-500">{author?.followers || 0} followers</p>
             </div>
             <button className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors">
               Follow
             </button>
-          </div>
+          </div> 
+          )}
           {/* Post Content */}
           <div className="prose prose-lg max-w-none">
             <div

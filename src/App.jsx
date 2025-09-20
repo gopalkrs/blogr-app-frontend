@@ -24,7 +24,7 @@ function App() {
       <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/posts/:id" element={<ProtectedRoutes><BlogPage /></ProtectedRoutes>} />
+          <Route path="/articles/:id" element={<ProtectedRoutes><BlogPage /></ProtectedRoutes>} />
           <Route path="/create" element={<ProtectedRoutes><CreateBlog /></ProtectedRoutes>} />
           <Route path="/login" element={<AuthRedirect><SignIn /></AuthRedirect>} />
           <Route path="/register" element={<AuthRedirect><SignUp /></AuthRedirect>} />

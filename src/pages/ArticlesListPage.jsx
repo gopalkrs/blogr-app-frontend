@@ -14,8 +14,6 @@ import { useGetAllPostStore } from "../store/useGetAllPostStore";
 import { Link } from "react-router-dom";
 import { useGetUserStore } from "../store/useGetUserStore";
 import { motion } from "framer-motion";
-import RecentPostSlider from "../components/RecentPostSlider";
-import BlogCard from "../components/home/BlogCard";
 import ArticleListPageHeader from "../components/article-list/ArticleListPageHeader";
 import ArticleComponent from "../components/article-list/ArticleComponent";
 

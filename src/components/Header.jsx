@@ -1,11 +1,6 @@
 import {
   BookOpen,
-  DollarSign,
-  FolderPen,
-  HelpCircle,
   Home,
-  LayoutDashboard,
-  Lightbulb,
   Loader2,
   LogOut,
   Mail,
@@ -14,9 +9,7 @@ import {
   Search,
   User,
   User2Icon,
-  UserRoundX,
   X,
-  Zap,
 } from "lucide-react";
 
 import {
@@ -28,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 //import { useUserStore } from "../store/userStore";
@@ -40,14 +33,30 @@ const Header = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const menuRef = useRef(null);
+
   useEffect(() => {
     fetchIfUserLogged();
   }, []);
+
+  useEffect(()=> {
+    const handleClickOutside = (event) => {
+      if(menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  } , []);
+  
 
   const { logOutUser } = useUserStore();
   const logoutUserHandler = async () => {
     await logOutUser();
     navigate("/");
+    setIsMobileMenuOpen(false);
     window.location.reload();
   };
 
@@ -81,14 +90,14 @@ const Header = () => {
           <span>Home</span>
         </Link>
         <Link
-          to={'/'}
+          to={'/articles'}
           className="flex items-center space-x-1 text-gray-700 hover:text-orange-600 transition-colors"
         >
           <BookOpen size={18} />
           <span>Articles</span>
         </Link>
         <Link
-          to={'/'}
+          to={'/create'}
           className="flex items-center space-x-1 text-gray-700 hover:text-orange-600 transition-colors"
         >
           <Pen size={18} />
@@ -150,7 +159,7 @@ const Header = () => {
           </div>
         )}
       </div>
-      <div className="moderate:hidden">
+      <div ref={menuRef} className="moderate:hidden">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="text-gray-700 hover:text-orange-600 transition-colors"
@@ -161,7 +170,7 @@ const Header = () => {
       </div>
       {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden border-t absolute top-16 left-0 right-0 bg-white border-orange-100 px-2 py-4 space-y-4">
+            <div ref={menuRef} className="moderate:hidden border-t absolute z-500 top-16 left-0 right-0 bg-white border-orange-100 px-2 py-4 space-y-4">
               <div className="relative mb-4">
                 <input
                   type="text"
@@ -173,15 +182,15 @@ const Header = () => {
                 <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
               </div>
               <nav className="space-y-2">
-                <Link to={'/'} className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors py-2">
+                <Link to={'/'} onClick={()=>setIsMobileMenuOpen(false)} className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors py-2">
                   <Home size={18} />
                   <span>Home</span>
                 </Link>
-                <Link to={'/'} className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors py-2">
+                <Link to={'/articles'} onClick={()=>setIsMobileMenuOpen(false)} className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors py-2">
                   <BookOpen size={18} />
                   <span>Articles</span>
                 </Link>
-                <Link to={'/'} className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors py-2">
+                <Link to={'/create'} onClick={()=>setIsMobileMenuOpen(false)} className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors py-2">
                   <Pen size={18} />
                   <span>Write</span>
                 </Link>
@@ -195,16 +204,18 @@ const Header = () => {
                       <LogOut size={18} />
                       <span>Signout</span>
                     </button>
-                    <Link to={`/users/${user?.id}`} className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors py-2">
+                    <Link onClick={()=>setIsMobileMenuOpen(false)} to={`/users/${user?.id}`} className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors py-2">
                       <User size={18} />
                       <span>Profile</span>
                     </Link>
                   </div>
                 )}
               </nav>
-              <button className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white py-2 rounded-full hover:from-orange-600 hover:to-amber-600 transition-all duration-200 shadow-md">
+              <Link to={'/register'} >
+              <button onClick={()=>setIsMobileMenuOpen(false)} className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white py-2 rounded-full hover:from-orange-600 hover:to-amber-600 transition-all duration-200 shadow-md">
                 Sign Up
               </button>
+              </Link>
             </div>
           )}
     </div>

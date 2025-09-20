@@ -1,13 +1,15 @@
 import { format } from "date-fns";
 import { Calendar, Clock, Eye, Heart } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ArticleComponent = ({ posts }) => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      {posts.map((article) => (
+      {posts.map((article, index) => (
+        <Link to={`/articles/${article._id}`} key={index}>
         <article
-          key={article.id}
+          key={index}
           className="bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-orange-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group cursor-pointer"
         >
           {/* Image */}
@@ -18,7 +20,7 @@ const ArticleComponent = ({ posts }) => {
               loading="lazy"
               className="h-full w-full object-cover"
               src={
-                posts.imageUrl ||
+                article.imageUrl ||
                 `https://gopalkrsbucket.s3.eu-north-1.amazonaws.com/f8a413fc-d089-4e28-9651-ad7f1f94795b-christin-hume-k2Kcwkandwg-unsplash.jpg`
               }
             />
@@ -102,6 +104,7 @@ const ArticleComponent = ({ posts }) => {
             </div>
           </div>
         </article>
+        </Link>
       ))}
     </div>
   );

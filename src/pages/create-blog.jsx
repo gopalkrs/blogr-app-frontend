@@ -31,7 +31,7 @@ const CreateBlog = () => {
     "Health",
     "Travel",
     "Food",
-    "Design",
+    "Sports",
     "Finance",
     "Career",
     "Environment",
